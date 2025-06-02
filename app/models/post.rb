@@ -1,0 +1,13 @@
+class Post < ApplicationRecord
+  has_one_attached :image
+
+  belongs_to :user
+  belongs_to :vegetable
+
+  enum category: { grow_log: 0, trouble_note: 1 }
+
+  validates :title, presence: true
+  validates :content, presence: true
+  validates :category, presence: true
+  validates :image, presence: true
+end
