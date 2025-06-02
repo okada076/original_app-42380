@@ -8,17 +8,15 @@
 
 
 ## URL
-https://◎◎◎◎.onrender.com
-<br>※デプロイ済みのURLを記載。デプロイが済んでいない場合は、デプロイが完了次第記載すること。
+https://original-app-42380.onrender.com/
 
 ## テスト用アカウント
-テスト用Email：test@test.com
-<br>テスト用Password：aaa123
-<br>※ログイン機能等を実装した場合は、ログインに必要な情報を記載。
-<br>Basic認証 ID:admin  PASS:1111
+テスト用Email：test1@test.com
+<br>テスト用Password：abc123
+<br>Basic認証  ID:admin  PASS:1111
 
 ## 利用方法
-1. URLにアクセスし、ヘッダー右上の「ログイン」ボタンからログイン画面に移動します。
+1. URLにアクセスし、ヘッダー左上の「ログイン」ボタンからログイン画面に移動します。
 2. テスト用アカウントを使用しログインします。
 3. トップページのヘッダー右上の「投稿する」ボタンから新規呟きを投稿します。
 4. 投稿内容には画像1枚と文章を含めることができます。
@@ -37,8 +35,8 @@ https://◎◎◎◎.onrender.com
 |![トップページのGIF](URL_TO_GIF)|トップページ　　　　　　　　　　　　　　　　　　　　　　|
 |![ユーザー機能のGIF](URL_TO_GIF)|ユーザー機能<br>・新規登録<br>・ログイン/ログアウト<br>・マイページ|
 |![ツイート機能のGIF](URL_TO_GIF)|ツイート（呟き）機能<br>・投稿機能<br>・一覧機能<br>・詳細機能<br>・編集・削除機能|
-|![コメント機能のGIF](URL_TO_GIF)|コメント機能|
-|![検索機能のGIF](URL_TO_GIF)|検索機能|
+|![コメント機能のGIF](URL_TO_GIF)|コメント機能・いいね機能|
+|![検索機能のGIF](URL_TO_GIF)|タグ検索機能|
 
 ## 実装予定の機能
 - リアルタイム通知機能
@@ -101,119 +99,3 @@ PicTweetは、誰でも簡単に使えるようにデザインされています
 
 ## 制作時間
 200時間
-
-
-
-# テーブル設計
-
-## users テーブル
-
-| Column             | Type   | Options                           |
-|--------------------|--------|-----------------------------------|
-| nickname           | string | null: false                       |
-| email              | string | null: false, unique: true         |
-| encrypted_password | string | null: false                       |
-
-### Association
-- has_many :posts
-- has_many :comments
-- has_many :likes
-
----
-
-## posts テーブル
-
-| Column       | Type       | Options                             | 説明                         |
-|--------------|------------|--------------------------------------|------------------------------|
-| title        | string     | null: false                         | 投稿のタイトル               |
-| content      | text       | null: false                         | 投稿の本文                   |
-| image        | string     | null: false                         | 画像（1枚必須）              |
-| category     | integer    | null: false                         | enumで育成記録/つまずきノート |
-| vegetable_id | integer    | null: false, foreign_key: true      | 紐づく野菜                   |
-| user_id      | references | null: false, foreign_key: true      | 投稿者                       |
-
-### Association
-- belongs_to :user
-- belongs_to :vegetable
-- has_many :comments
-- has_many :likes
-- has_many :post_tags
-- has_many :tags, through: :post_tags
-
----
-
-## comments テーブル
-
-| Column   | Type       | Options                          |
-|----------|------------|----------------------------------|
-| text     | text       | null: false                      |
-| user_id  | references | null: false, foreign_key: true   |
-| post_id  | references | null: false, foreign_key: true   |
-
-### Association
-- belongs_to :user
-- belongs_to :post
-
----
-
-## likes テーブル
-
-| Column   | Type       | Options                          |
-|----------|------------|----------------------------------|
-| user_id  | references | null: false, foreign_key: true   |
-| post_id  | references | null: false, foreign_key: true   |
-
-### Association
-- belongs_to :user
-- belongs_to :post
-
----
-
-## tags テーブル
-
-| Column | Type   | Options     |
-|--------|--------|-------------|
-| name   | string | null: false |
-
-### Association
-- has_many :post_tags
-- has_many :posts, through: :post_tags
-
----
-
-## post_tags テーブル（中間テーブル）
-
-| Column   | Type       | Options                          |
-|----------|------------|----------------------------------|
-| post_id  | references | null: false, foreign_key: true   |
-| tag_id   | references | null: false, foreign_key: true   |
-
-### Association
-- belongs_to :post
-- belongs_to :tag
-
----
-
-## vegetables テーブル
-
-| Column | Type   | Options     |
-|--------|--------|-------------|
-| name   | string | null: false |
-
-### Association
-- has_many :posts
-- has_many :growing_steps
-
----
-
-## growing_steps テーブル
-
-| Column        | Type       | Options                          | 説明        |
-|---------------|------------|----------------------------------|-------------|
-| title         | string     | null: false                     | ステップ名  |
-| content       | text       | null: false                     | 内容        |
-| step_number   | integer    | null: false                     | 表示順      |
-| vegetable_id  | references | null: false, foreign_key: true | 紐づく野菜  |
-
-### Association
-- belongs_to :vegetable
