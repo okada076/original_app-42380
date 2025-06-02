@@ -47,11 +47,11 @@ https://◎◎◎◎.onrender.com
 - 高度な検索フィルター機能
 
 ## データベース設計
-<img width="307" alt="Image" src=https://github.com/okada076/original_app-42380/raw/main/test.png />
+<img width="307" alt="Image" src="https://github.com/okada076/original_app-42380/raw/main/test.png" />
 
 
 ## 画面遷移図
-<img width="509" alt="Image" src="https://github.com/user-attachments/assets/086ceb82-5286-4340-b4ff-014d621e4d26" />
+<img width="509" alt="画面遷移図" src="https://github.com/okada076/original_app-42380/raw/main/screen_transition.png" />
 
 
 ## 開発環境
