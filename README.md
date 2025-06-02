@@ -47,14 +47,10 @@ https://◎◎◎◎.onrender.com
 - 高度な検索フィルター機能
 
 ## データベース設計
-ER図を添付。
-<br>AIで作る場合は、googleアカウントがあれば使用できる「Vercel v0」がオススメです。
-<img width="307" alt="Image" src="https://github.com/user-attachments/assets/f780ed7f-e22c-495f-ad7d-5add7f75e45f" />
+<img width="307" alt="Image" src=https://github.com/okada076/original_app-42380/raw/main/test.png />
 
 
 ## 画面遷移図
-画面遷移図を添付。
-<br>AIで作る場合は、googleアカウントがあれば使用できる「Vercel v0」がオススメです。
 <img width="509" alt="Image" src="https://github.com/user-attachments/assets/086ceb82-5286-4340-b4ff-014d621e4d26" />
 
 
