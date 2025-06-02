@@ -10,4 +10,5 @@ class Post < ApplicationRecord
   validates :content, presence: true
   validates :category, presence: true
   validates :image, presence: true
+  validates :vegetable_id, presence: true
 end
