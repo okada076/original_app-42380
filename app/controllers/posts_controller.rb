@@ -25,7 +25,7 @@ class PostsController < ApplicationController
     when 'mine'
       @posts = @posts.where(user_id: current_user.id) if user_signed_in?
     else
-      @posts = @posts.where(category: '育成記録')
+      @posts = @posts.where(category: 'grow_log')
     end
 
     @posts = @posts.order(created_at: :desc)
