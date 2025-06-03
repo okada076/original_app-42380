@@ -16,6 +16,7 @@
       <p>こんにちは、<%= current_user.nickname %> さん</p>
       <%= link_to 'トップページ', root_path %> |
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+      <%= link_to '投稿する', new_post_path %> 
     <% else %>
       <%= link_to 'トップページ', root_path %> |
       <%= link_to '新規登録', new_user_registration_path %> |
