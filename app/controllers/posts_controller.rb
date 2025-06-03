@@ -37,6 +37,8 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+    @vegetables = Vegetable.all
   end
 
   def update
