@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Vegetable.create([
+  { name: "トマト" }, 
+  { name: "きゅうり" }, 
+  { name: "にんじん" }, 
+  { name: "レモン" }, 
+  { name: "さつまいも" }, 
+  { name: "なす" }, 
+  { name: "カボチャ" }, 
+  { name: "すだち" }, 
+  { name: "じゃがいも" }, 
+  { name: "レタス" }
+])
