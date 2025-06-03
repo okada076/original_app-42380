@@ -1,0 +1,16 @@
+<h1><%= @post.title %></h1>
+
+<% if @post.image.attached? %>
+  <%= image_tag url_for(@post.image), width: 300 %>
+<% end %>
+
+<p><strong>本文:</strong> <%= @post.content %></p>
+<p><strong>カテゴリー:</strong> <%= category_label(@post.category) %></p>
+<p><strong>野菜名:</strong> <%= @post.vegetable.name if @post.vegetable %></p>
+<p><strong>投稿者:</strong> <%= @post.user.nickname %></p>
+<p><strong>投稿日:</strong> <%= @post.created_at.strftime("%Y年%m月%d日") %></p>
+
+<% if user_signed_in? && current_user == @post.user %>
+  <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
+  <%= link_to '削除', post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger' %>
+<% end %>

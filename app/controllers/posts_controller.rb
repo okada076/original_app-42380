@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :redirect_unless_owner, only: [:edit, :update, :destroy]
   def new
     @post = Post.new
     @vegetables = Vegetable.all
@@ -31,9 +32,29 @@ class PostsController < ApplicationController
     @posts = @posts.order(created_at: :desc)
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+    @vegetables = Vegetable.all
+  end
+
+  def update
+  end
+
+  def destroy
+  end
+
   private
 
   def post_params
     params.require(:post).permit(:title, :content, :category, :image, :vegetable_id)
+  end
+
+  def redirect_unless_owner
+    @post = Post.find(params[:id])
+    redirect_to posts_path, alert: '不正なアクセスです。' unless current_user == @post.user
   end
 end
