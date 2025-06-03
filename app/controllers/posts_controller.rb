@@ -31,6 +31,10 @@ class PostsController < ApplicationController
     @posts = @posts.order(created_at: :desc)
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   private
 
   def post_params
