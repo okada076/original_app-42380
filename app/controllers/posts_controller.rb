@@ -42,6 +42,14 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find(params[:id])
+    @vegetables = Vegetable.all
+
+    if @post.update(post_params)
+      redirect_to post_path(@post), notice: '投稿を更新しました'
+    else
+      render :edit
+    end
   end
 
   def destroy
