@@ -7,12 +7,16 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-
     if @post.save
       redirect_to root_path, notice: '投稿が完了しました'
     else
+      @vegetables = Vegetable.all
       render :new
     end
+  end
+
+  def index
+    @posts = Post.all.order(created_at: :desc)
   end
 
   private
