@@ -5,7 +5,7 @@
   <%= link_to "育成記録", posts_path(filter: "record"), class: ("active" if params[:filter].nil? || params[:filter] == "record") %> |
   <%= link_to "つまずきノート", posts_path(filter: "failure"), class: ("active" if params[:filter] == "failure") %> |
   <% if user_signed_in? %>
-    <%= link_to "自分の投稿", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
+    <%= link_to "マイページ", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
   <% end %>
 </div>
 
