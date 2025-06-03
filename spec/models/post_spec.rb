@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe Post, type: :model do
   before do
-    @post = FactoryBot.build(:post)
+    @post = build(:post, vegetable: create(:vegetable), user: create(:user))
   end
 
   describe '投稿の保存' do
@@ -39,7 +39,7 @@ RSpec.describe Post, type: :model do
       it '野菜が紐づいていないと保存できない' do
         @post.vegetable = nil
         expect(@post).to_not be_valid
-        expect(@post.errors.full_messages).to include('Vegetable must exist')
+        expect(@post.errors.full_messages).to include("Vegetable can't be blank")
       end
 
       it 'ユーザーが紐づいていないと保存できない' do
