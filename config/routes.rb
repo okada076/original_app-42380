@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'posts#index'
   devise_for :users
   resources :posts
-  resources :posts, only: [:new, :create]
+  resources :posts, only: [:index, :new, :create, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

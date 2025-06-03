@@ -17,7 +17,18 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.includes(:user, :vegetable)
+
+    case params[:filter]
+    when 'failure'
+      @posts = @posts.where(category: 'つまずきノート')
+    when 'mine'
+      @posts = @posts.where(user_id: current_user.id) if user_signed_in?
+    else
+      @posts = @posts.where(category: 'grow_log')
+    end
+
+    @posts = @posts.order(created_at: :desc)
   end
 
   private
