@@ -31,13 +31,20 @@
   </div>
 
   <div>
-    <%= f.label :image, "画像" %><br>
-    <%= f.file_field :image %>
-    <% if post.image.attached? %>
-      <p>現在の画像：</p>
-      <%= image_tag post.image, width: 200 %>
-    <% end %>
-  </div>
+  <%= f.label :image, "画像" %><br>
+  <%= f.file_field :image %>
+
+  <% if post.persisted? && post.image.attached? %>
+  <% begin %>
+    <p>現在の画像：</p>
+    <%= image_tag url_for(post.image), width: 200 %><br>
+    <%= check_box_tag 'remove_image', '1' %>
+    <%= label_tag 'remove_image', '画像を削除する' %>
+  <% rescue ActiveStorage::UnrepresentableError, ArgumentError => e %>
+    <p>※ 画像プレビューは表示できません（再アップロードしてください）</p>
+  <% end %>
+<% end %>
+</div>
 
   <div>
     <%= f.submit "投稿する" %>

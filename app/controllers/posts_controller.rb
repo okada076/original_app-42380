@@ -45,6 +45,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @vegetables = Vegetable.all
 
+    @post.image.purge if params[:remove_image] == '1' && @post.image.attached?
+
     if @post.update(post_params)
       redirect_to post_path(@post), notice: '投稿を更新しました'
     else
