@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
     case params[:filter]
     when 'failure'
-      @posts = @posts.where(category: 'つまずきノート')
+      @posts = @posts.where(category: 'trouble_note')
     when 'mine'
       @posts = @posts.where(user_id: current_user.id) if user_signed_in?
     else
