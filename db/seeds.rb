@@ -18,5 +18,5 @@ Vegetable.create([
   { name: "カボチャ" }, 
   { name: "すだち" }, 
   { name: "じゃがいも" }, 
-  { name: "レタス" }
+  { name: "その他" }
 ])
