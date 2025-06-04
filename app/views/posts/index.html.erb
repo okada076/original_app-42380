@@ -2,8 +2,8 @@
 
 <!-- 🔁 カテゴリー切り替えタブ -->
 <div class="filter-tabs">
-  <%= link_to "育成記録", posts_path(filter: "record"), class: ("active" if params[:filter].nil? || params[:filter] == "record") %> |
-  <%= link_to "つまずきノート", posts_path(filter: "failure"), class: ("active" if params[:filter] == "failure") %> |
+  <%= link_to "育成記録", posts_path(filter: "grow_log"), class: ("active" if params[:filter].nil? || params[:filter] == "grow_log") %> 
+  <%= link_to "つまずきノート", posts_path(filter: "failure"), class: ("active" if params[:filter] == "failure") %> 
   <% if user_signed_in? %>
     <%= link_to "マイページ", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
   <% end %>
@@ -28,6 +28,7 @@
     <%= link_to '削除', post_path(post), method: :delete %>
    <% end %>
   </div>
+ <% end %>
 <% end %>
 
 
