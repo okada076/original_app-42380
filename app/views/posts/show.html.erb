@@ -15,6 +15,7 @@
   <%= link_to '削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
 <% end %>
 
+<% if user_signed_in? %>
 <h3>コメント一覧</h3>
 
 <% if @comments.any? %>
@@ -31,8 +32,6 @@
   <p>まだコメントはありません</p>
 <% end %>
 
-<% if user_signed_in? %>
-
   <%= form_with model: [@post, @comment], local: true do |f| %>
     <div>
       <%= f.label :content, "コメント内容" %><br>
@@ -44,5 +43,4 @@
     </div>
   <% end %>
 <% else %>
-  <p>※ コメントを投稿するにはログインが必要です。</p>
 <% end %>
