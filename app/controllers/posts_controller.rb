@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :redirect_unless_owner, only: [:edit, :update, :destroy]
   def new
     @post = Post.new
@@ -33,16 +34,13 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def edit
-    @post = Post.find(params[:id])
     @vegetables = Vegetable.all
   end
 
   def update
-    @post = Post.find(params[:id])
     @vegetables = Vegetable.all
 
     @post.image.purge if params[:remove_image] == '1' && @post.image.attached?
@@ -55,6 +53,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post.destroy
+    if @post.category == 'grow_log'
+      redirect_to grow_logs_path, notice: '育成記録を削除しました。'
+    else
+      redirect_to troubles_path, notice: 'つまずきノートを削除しました。'
+    end
   end
 
   private
@@ -64,7 +68,12 @@ class PostsController < ApplicationController
   end
 
   def redirect_unless_owner
+    return if current_user == @post.user
+
+    redirect_to grow_logs_path, alert: '不正なアクセスです。'
+  end
+
+  def set_post
     @post = Post.find(params[:id])
-    redirect_to posts_path, alert: '不正なアクセスです。' unless current_user == @post.user
   end
 end

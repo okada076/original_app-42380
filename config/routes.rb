@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   root 'posts#index'
   devise_for :users
   resources :posts
+
+  get '/grow_logs', to: 'posts#index', defaults: { filter: 'grow_log' }, as: 'grow_logs'
+  get '/troubles', to: 'posts#index', defaults: { filter: 'failure' }, as: 'troubles'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
