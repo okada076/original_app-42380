@@ -3,6 +3,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
   belongs_to :vegetable, optional: true
+  has_many :comments, dependent: :destroy
 
   enum category: { grow_log: 0, trouble_note: 1 }
 
