@@ -27,7 +27,7 @@ RSpec.describe 'Posts', type: :request do
 
       it '投稿一覧にリダイレクトされる' do
         get edit_post_path(post), headers: headers
-        expect(response).to redirect_to posts_path
+        expect(response).to redirect_to grow_logs_path
         expect(flash[:alert]).to eq '不正なアクセスです。'
       end
     end
@@ -42,6 +42,45 @@ RSpec.describe 'Posts', type: :request do
           )
         }
         expect(response).to have_http_status(:success)
+      end
+    end
+  end
+  # ========================
+  # ★ 追記：削除に関するテスト
+  # ========================
+  describe 'DELETE /posts/:id' do
+    context 'ログインしていないとき' do
+      it 'ログインページにリダイレクトされる' do
+        delete post_path(post), headers: headers
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+    context '投稿者以外のユーザーのとき' do
+      before do
+        post # ★ 投稿を作っておく
+        sign_in other_user
+      end
+
+      it 'トップページにリダイレクトされ、削除されない' do
+        expect do
+          delete post_path(post), headers: headers
+        end.not_to change(Post, :count)
+        expect(response).to redirect_to grow_logs_path
+      end
+    end
+
+    context '投稿者本人のとき' do
+      before do
+        post # 投稿を作成しておく
+        sign_in user
+      end
+
+      it '投稿を削除できてリダイレクトされる' do
+        expect do
+          delete post_path(post), headers: headers
+        end.to change(Post, :count).by(-1)
+        expect(response).to redirect_to grow_logs_path
       end
     end
   end
