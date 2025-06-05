@@ -19,18 +19,22 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:user, :vegetable)
-
-    case params[:filter]
-    when 'failure'
-      @posts = @posts.where(category: 'trouble_note')
-    when 'mine'
-      @posts = @posts.where(user_id: current_user.id) if user_signed_in?
+    if params[:tag].present?
+      @posts = Post.joins(:tags).where(tags: { name: params[:tag] }).distinct.order(created_at: :desc)
     else
-      @posts = @posts.where(category: 'grow_log')
-    end
+      @posts = Post.includes(:user, :vegetable)
 
-    @posts = @posts.order(created_at: :desc)
+      case params[:filter]
+      when 'failure'
+        @posts = @posts.where(category: 'trouble_note')
+      when 'mine'
+        @posts = @posts.where(user_id: current_user.id) if user_signed_in?
+      else
+        @posts = @posts.where(category: 'grow_log')
+      end
+
+      @posts = @posts.order(created_at: :desc)
+    end
   end
 
   def show
