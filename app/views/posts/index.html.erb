@@ -12,6 +12,7 @@
   <%= form_with url: posts_path, method: :get, local: true do %>
   <%= label_tag :tag, 'タグで検索' %>
   <%= text_field_tag :tag, params[:tag] %>
+  <%= hidden_field_tag :filter, params[:filter] %>
   <%= submit_tag '検索' %>
 <% end %>
 
