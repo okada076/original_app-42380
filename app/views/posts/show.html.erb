@@ -19,7 +19,7 @@
 <% end %>
 
 <% if @post.likes.count > 0 %>
-  <p>いいね数：<%= @post.likes.count %></p>
+  <p><%= @post.likes.count %></p>
 <% end %>
 
 <% if user_signed_in? && current_user == @post.user %>
