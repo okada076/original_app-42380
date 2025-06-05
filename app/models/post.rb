@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :vegetable, optional: true
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
 
   enum category: { grow_log: 0, trouble_note: 1 }
 

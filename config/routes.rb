@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'comments/create'
   root 'posts#index'
   devise_for :users
   resources :posts
@@ -14,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only: :create
+    resources :likes, only: [:create, :destroy]
   end
 
   # Defines the root path route ("/")
