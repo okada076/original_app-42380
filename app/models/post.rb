@@ -11,15 +11,22 @@ class Post < ApplicationRecord
 
   enum category: { grow_log: 0, trouble_note: 1 }
 
-  validates :title, presence: true
-  validates :content, presence: true
-  validates :category, presence: true
-  validates :image, presence: true
-  validates :vegetable_id, presence: true
+  validates :title, :content, :category, :image, :vegetable_id, presence: true
 
-  private
+  attr_accessor :tag_names
 
-  def image_presence
-    errors.add(:image, 'を添付してください') unless image.attached?
+  after_save :save_tags
+
+  def save_tags
+    return if tag_names.nil?
+
+    # タグの更新をトランザクション内で安全に処理
+    PostTag.transaction do
+      post_tags.destroy_all
+      tag_names.split(',').map(&:strip).reject(&:blank?).each do |tag_name|
+        tag = Tag.find_or_create_by(name: tag_name)
+        tags << tag unless tags.include?(tag)
+      end
+    end
   end
 end
