@@ -66,7 +66,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :category, :image, :vegetable_id)
+    params.require(:post).permit(:title, :content, :category, :image, :vegetable_id, :tag_names)
   end
 
   def redirect_unless_owner
