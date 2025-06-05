@@ -7,6 +7,11 @@
   <% if user_signed_in? %>
     <%= link_to "マイページ", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
   <% end %>
+  <%= form_with url: posts_path, method: :get, local: true do %>
+  <%= label_tag :tag, 'タグで検索' %>
+  <%= text_field_tag :tag, params[:tag] %>
+  <%= submit_tag '検索' %>
+<% end %>
 </div>
 
 <!-- 🗂 投稿一覧表示 -->
