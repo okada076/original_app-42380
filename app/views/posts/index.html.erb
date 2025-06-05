@@ -7,30 +7,33 @@
   <% if user_signed_in? %>
     <%= link_to "マイページ", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
   <% end %>
+
+  <!-- 🔍 タグ検索フォーム -->
   <%= form_with url: posts_path, method: :get, local: true do %>
   <%= label_tag :tag, 'タグで検索' %>
   <%= text_field_tag :tag, params[:tag] %>
   <%= submit_tag '検索' %>
 <% end %>
-</div>
 
-<!-- 🗂 投稿一覧表示 -->
-<% if @posts.empty? %>
-  <p>投稿がまだありません。</p>
+<!-- 🗂 投稿一覧 or メッセージ -->
+
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <div class="post-card">
+      <% if post.image.attached? %>
+        <%= image_tag url_for(post.image), width: 200, height: 200 %>
+      <% end %>
+      <p><strong>タイトル:</strong> <%= post.title %></p>
+      <p><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
+      <p><strong>カテゴリー:</strong> <%= category_label(post.category) %></p>
+      <p><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
+      <%= link_to '詳細を見る', post_path(post) %>
+    </div>
+  <% end %>
 <% else %>
-<% @posts.each do |post| %>
-  <div class="post-card">
-    <% if post.image.attached? %>
-      <%= image_tag url_for(post.image), width: 200, height: 200 %>
-    <% end %>
-    <p><strong>タイトル:</strong> <%= post.title %></p>
-    <p><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
-    <p><strong>カテゴリー:</strong> <%= category_label(post.category) %></p>
-    <p><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
-    <%= link_to '詳細を見る', post_path(post) %>
-  </div>
- <% end %>
+  <p>該当する投稿はありません。</p>
 <% end %>
+
 
 
 
