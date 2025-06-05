@@ -4,6 +4,15 @@
   <%= image_tag url_for(@post.image), width: 300 %>
 <% end %>
 
+<% if @post.tags.any? %>
+  <% @post.tags.each do |tag| %>
+    <%= link_to "##{tag.name}", tag_path(tag) %>
+  <% end %>
+<% else %>
+  <span>タグなし</span>
+<% end %>
+
+
 <p><strong>本文:</strong> <%= @post.content %></p>
 <p><strong>カテゴリー:</strong> <%= category_label(@post.category) %></p>
 <p><strong>野菜名:</strong> <%= @post.vegetable.name if @post.vegetable %></p>
