@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
+  has_many :post_tags, dependent: :destroy
+  has_many :tags, through: :post_tags
 
   enum category: { grow_log: 0, trouble_note: 1 }
 
