@@ -40,6 +40,8 @@ class PostsController < ApplicationController
 
   def edit
     @vegetables = Vegetable.all
+    @post = Post.find(params[:id])
+    @post.tag_names = @post.tags.pluck(:name).join(', ')
   end
 
   def update
