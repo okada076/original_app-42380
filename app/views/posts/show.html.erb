@@ -1,5 +1,11 @@
 <h1><%= @post.title %></h1>
 
+<% if params[:tag].present? %>
+  <%= link_to '検索結果に戻る', posts_path(tag: params[:tag], filter: params[:filter]) %>
+<% else %>
+  <%= link_to 'トップページに戻る', root_path %>
+<% end %>
+
 <% if @post.image.attached? %>
   <%= image_tag url_for(@post.image), width: 300 %>
 <% end %>

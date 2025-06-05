@@ -1,4 +1,4 @@
-<h1>投稿一覧</h1>
+<h1>育成記録一覧</h1>
 
 <!-- 🔁 カテゴリー切り替えタブ -->
 <div class="filter-tabs">
@@ -28,7 +28,7 @@
       <p><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
       <p><strong>カテゴリー:</strong> <%= category_label(post.category) %></p>
       <p><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
-      <%= link_to '詳細を見る', post_path(post) %>
+      <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]) %>
     </div>
   <% end %>
 <% else %>
