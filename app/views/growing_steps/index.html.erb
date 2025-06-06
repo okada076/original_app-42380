@@ -1,2 +1,14 @@
-<h1>GrowingSteps#index</h1>
-<p>Find me in app/views/growing_steps/index.html.erb</p>
+<h2><%= @vegetable.name %> の育て方ガイド</h2>
+
+<ol>
+  <% @growing_steps.each do |step| %>
+    <li>
+      <h3>Step <%= step.step_number %>: <%= step.title %></h3>
+      <p><%= step.content %></p>
+      <input type="checkbox" id="step_<%= step.id %>">
+      <label for="step_<%= step.id %>">完了</label>
+    </li>
+  <% end %>
+</ol>
+
+<%= link_to '野菜一覧に戻る', vegetables_path %>
