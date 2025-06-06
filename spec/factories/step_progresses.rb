@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :step_progress do
-    user { nil }
-    growing_step { nil }
+    association :user
+    association :growing_step
     checked { false }
   end
 end
