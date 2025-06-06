@@ -8,15 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Vegetable.create([
-  { name: "トマト" }, 
-  { name: "きゅうり" }, 
-  { name: "にんじん" }, 
-  { name: "レモン" }, 
-  { name: "さつまいも" }, 
-  { name: "なす" }, 
-  { name: "カボチャ" }, 
-  { name: "すだち" }, 
-  { name: "じゃがいも" }, 
-  { name: "その他" }
-])
+Vegetable.create[
+  "トマト", "きゅうり", "にんじん", "レモン", "さつまいも",
+  "なす", "カボチャ", "すだち", "じゃがいも", "レタス", "その他"
+].each do |name|
+  Vegetable.find_or_create_by(name: name)
+end
