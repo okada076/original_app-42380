@@ -10,6 +10,11 @@
   </div>
 <% end %>
 
+<div>
+  <%= f.label :tag_names, "タグ（カンマ区切りで入力）" %><br>
+  <%= f.text_field :tag_names, value: @post.tags.pluck(:name).join(', ') %>
+</div>
+
   <div>
     <%= f.label :title, "タイトル" %><br>
     <%= f.text_field :title %>

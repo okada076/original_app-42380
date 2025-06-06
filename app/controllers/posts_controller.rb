@@ -19,8 +19,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:user, :vegetable)
+    @posts = Post.includes(:user, :vegetable, :tags)
 
+    # カテゴリ別に絞り込み
     case params[:filter]
     when 'failure'
       @posts = @posts.where(category: 'trouble_note')
@@ -29,6 +30,9 @@ class PostsController < ApplicationController
     else
       @posts = @posts.where(category: 'grow_log')
     end
+
+    # タグ検索（カテゴリと併用可能）
+    @posts = @posts.joins(:tags).where(tags: { name: params[:tag] }).distinct if params[:tag].present?
 
     @posts = @posts.order(created_at: :desc)
   end
@@ -40,6 +44,8 @@ class PostsController < ApplicationController
 
   def edit
     @vegetables = Vegetable.all
+    @post = Post.find(params[:id])
+    @post.tag_names = @post.tags.pluck(:name).join(', ')
   end
 
   def update
@@ -66,7 +72,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :category, :image, :vegetable_id)
+    params.require(:post).permit(:title, :content, :category, :image, :vegetable_id, :tag_names)
   end
 
   def redirect_unless_owner

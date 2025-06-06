@@ -1,0 +1,7 @@
+<h2><%= "##{@tag.name}" %> のタグがついた投稿</h2>
+
+<% @posts.each do |post| %>
+  <div>
+    <%= link_to post.title, post_path(post) %>（<%= post.user.nickname %>）
+  </div>
+<% end %>

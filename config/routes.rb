@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'posts#index'
   devise_for :users
   resources :posts
+  resources :tags, only: [:show]
 
   get '/grow_logs', to: 'posts#index', defaults: { filter: 'grow_log' }, as: 'grow_logs'
   get '/troubles', to: 'posts#index', defaults: { filter: 'failure' }, as: 'troubles'

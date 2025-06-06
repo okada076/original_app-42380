@@ -1,31 +1,39 @@
-<h1>投稿一覧</h1>
+<h1>育成記録一覧</h1>
 
 <!-- 🔁 カテゴリー切り替えタブ -->
 <div class="filter-tabs">
-  <%= link_to "育成記録", posts_path(filter: "grow_log"), class: ("active" if params[:filter].nil? || params[:filter] == "grow_log") %> 
   <%= link_to "つまずきノート", posts_path(filter: "failure"), class: ("active" if params[:filter] == "failure") %> 
   <% if user_signed_in? %>
     <%= link_to "マイページ", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
   <% end %>
-</div>
 
-<!-- 🗂 投稿一覧表示 -->
-<% if @posts.empty? %>
-  <p>投稿がまだありません。</p>
-<% else %>
-<% @posts.each do |post| %>
-  <div class="post-card">
-    <% if post.image.attached? %>
-      <%= image_tag url_for(post.image), width: 200, height: 200 %>
-    <% end %>
-    <p><strong>タイトル:</strong> <%= post.title %></p>
-    <p><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
-    <p><strong>カテゴリー:</strong> <%= category_label(post.category) %></p>
-    <p><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
-    <%= link_to '詳細を見る', post_path(post) %>
-  </div>
- <% end %>
+  <!-- 🔍 タグ検索フォーム -->
+  <%= form_with url: posts_path, method: :get, local: true do %>
+  <%= label_tag :tag, 'タグで検索' %>
+  <%= text_field_tag :tag, params[:tag] %>
+  <%= hidden_field_tag :filter, params[:filter] %>
+  <%= submit_tag '検索' %>
 <% end %>
+
+<!-- 🗂 投稿一覧 or メッセージ -->
+
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <div class="post-card">
+      <% if post.image.attached? %>
+        <%= image_tag url_for(post.image), width: 200, height: 200 %>
+      <% end %>
+      <p><strong>タイトル:</strong> <%= post.title %></p>
+      <p><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
+      <p><strong>カテゴリー:</strong> <%= category_label(post.category) %></p>
+      <p><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
+      <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]) %>
+    </div>
+  <% end %>
+<% else %>
+  <p>該当する投稿はありません。</p>
+<% end %>
+
 
 
 
