@@ -8,11 +8,11 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Vegetable.create[
+[
   "トマト", "きゅうり", "にんじん", "レモン", "さつまいも",
   "なす", "カボチャ", "すだち", "じゃがいも", "レタス", "その他"
 ].each do |name|
-  Vegetable.find_or_create_by(name: name)
+  Vegetable.find_or_create_by!(name: name)
 end
 
 # === トマトの作り方手順データを追加 ===
