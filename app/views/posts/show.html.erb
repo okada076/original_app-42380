@@ -13,7 +13,7 @@
 <p><strong>タグ:</strong>
   <% if @post.tags.any? %>
     <% @post.tags.each do |tag| %>
-      <%= link_to "##{tag.name}", tag_path(tag) %>
+      <%= link_to "##{tag.name}", posts_path(tag_name: tag.name) %>
     <% end %>
   <% else %>
     タグなし

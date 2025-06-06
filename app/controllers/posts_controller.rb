@@ -21,7 +21,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.includes(:user, :vegetable, :tags)
 
-    # カテゴリ別に絞り込む
+    # カテゴリ別に絞り込み
     case params[:filter]
     when 'failure'
       @posts = @posts.where(category: 'trouble_note')
@@ -30,7 +30,10 @@ class PostsController < ApplicationController
     else
       @posts = @posts.where(category: 'grow_log')
     end
-    @posts = @posts.joins(:tags).where(tags: { name: params[:tag] }) if params[:tag].present? && params[:tag].present?
+
+    # タグ検索（カテゴリと併用可能）
+    @posts = @posts.joins(:tags).where(tags: { name: params[:tag] }).distinct if params[:tag].present?
+
     @posts = @posts.order(created_at: :desc)
   end
 
