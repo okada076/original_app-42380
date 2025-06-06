@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'growing_steps/index'
   root 'posts#index'
   devise_for :users
   resources :posts
