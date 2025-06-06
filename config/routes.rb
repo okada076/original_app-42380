@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
 
+  resources :vegetables do
+    resources :growing_steps, only: [:index]
+  end
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
