@@ -6,10 +6,12 @@
     <div>
       <%= form_with url: step_progresses_path, method: :post, local: true do |f| %>
         <%= hidden_field_tag :growing_step_id, step.id %>
-        <label>
-          <%= check_box_tag :checked, "1", progress&.checked, onchange: "this.form.submit();" %>
-          <strong>STEP <%= step.step_number %>: <%= step.title %></strong>
-        </label>
+        
+        <%= check_box_tag :checked, "1", progress&.checked,
+        id: "step_checkbox_#{step.id}",
+        onchange: "this.form.submit();" %>
+
+       <%= label_tag "step_checkbox_#{step.id}", "STEP #{step.step_number}: #{step.title}" %>
       <% end %>
       <p><%= step.content %></p>
     </div>

@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'StepProgresses', type: :system do
   before do
+    driven_by(:selenium_chrome_headless)
+
     @user = FactoryBot.create(:user)
     @vegetable = FactoryBot.create(:vegetable, name: 'トマト')
     @step1 = FactoryBot.create(:growing_step, vegetable: @vegetable, step_number: 1, title: '種まき', content: '種をまく')
@@ -27,7 +29,7 @@ RSpec.describe 'StepProgresses', type: :system do
     visit vegetable_growing_steps_path(@vegetable)
 
     expect(page).to have_unchecked_field('STEP 1')
-    check 'STEP 1'
+    check("step_checkbox_#{@step1.id}")
 
     visit current_path
     expect(page).to have_checked_field('STEP 1')
@@ -42,5 +44,14 @@ RSpec.describe 'StepProgresses', type: :system do
 
     expect(current_path).to eq(vegetable_growing_steps_path(@vegetable))
     expect(page).to have_content('トマト の作り方ガイド')
+  end
+
+  it '未ログインユーザーは育て方手順ページにアクセスできずログインページにリダイレクトされる' do
+    logout(:user) # Deviseのログアウトヘルパー（使えない場合は sign_out @user に変更）
+
+    visit vegetable_growing_steps_path(@vegetable)
+
+    expect(current_path).to eq new_user_session_path
+    expect(page).to have_content('ログイン')
   end
 end
