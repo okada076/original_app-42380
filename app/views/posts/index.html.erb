@@ -1,3 +1,4 @@
+<div class="post-header">
 <h1>
   <% case params[:filter] %>
   <% when "failure" %>
@@ -23,6 +24,7 @@
   <%= hidden_field_tag :filter, params[:filter] %>
   <%= submit_tag '検索' %>
 <% end %>
+</div>
 
 <!-- 🗂 投稿一覧 or メッセージ -->
 
