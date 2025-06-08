@@ -1,57 +1,59 @@
-<%= form_with model: @post, local: true, data: { turbo: false }  do |f| %>
+<div class="form-container">
+<%= form_with model: @post, local: true, data: { turbo: false }, class: "post-form" do |f| %>
   <% if @post.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(post.errors.count, "件のエラー") %>が発生しました。</h2>
-    <ul>
-      <% post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<div>
-  <%= f.label :tag_names, "タグ（カンマ区切りで入力）" %><br>
-  <%= f.text_field :tag_names, value: @post.tags.pluck(:name).join(', ') %>
-</div>
-
-  <div>
-    <%= f.label :title, "タイトル" %><br>
-    <%= f.text_field :title %>
-  </div>
-
-  <div>
-    <%= f.label :content, "内容" %><br>
-    <%= f.text_area :content %>
-  </div>
-
-  <div>
-   <%= f.label :category, "カテゴリー" %><br>
-   <%= f.select :category, Post.categories.keys.map { |k| [category_label(k), k] }, prompt: "選択してください" %>
-  </div>
-
-  <div>
-    <%= f.label :vegetable_id, "野菜" %><br>
-    <%= f.collection_select :vegetable_id, Vegetable.all, :id, :name, prompt: "選択してください" %>
-  </div>
-
-  <div>
-  <%= f.label :image, "画像" %><br>
-  <%= f.file_field :image %>
-
-  <% if @post.persisted? && @post.image.attached? %>
-  <% begin %>
-    <p>現在の画像：</p>
-    <%= image_tag url_for(@post.image), width: 200 %><br>
-    <%= check_box_tag 'remove_image', '1' %>
-    <%= label_tag 'remove_image', '画像を削除する' %>
-  <% rescue ActiveStorage::UnrepresentableError, ArgumentError => e %>
-    <p>※ 画像プレビューは表示できません（再アップロードしてください）</p>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "件のエラー") %>が発生しました。</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
-<% end %>
-</div>
 
-  <div>
-    <%= f.submit "投稿する" %>
+  <div class="form-group">
+    <%= f.label :tag_names, "タグ（カンマ区切りで入力）" %>
+    <%= f.text_field :tag_names, value: @post.tags.pluck(:name).join(', '), class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content, "内容" %>
+    <%= f.text_area :content, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :category, "カテゴリー" %>
+    <%= f.select :category, Post.categories.keys.map { |k| [category_label(k), k] }, prompt: "選択してください", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :vegetable_id, "野菜" %>
+    <%= f.collection_select :vegetable_id, Vegetable.all, :id, :name, prompt: "選択してください", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :image, "画像" %>
+    <%= f.file_field :image, class: "form-control-file" %>
+
+    <% if @post.persisted? && @post.image.attached? %>
+      <% begin %>
+        <p>現在の画像：</p>
+        <%= image_tag url_for(@post.image), width: 200 %><br>
+        <%= check_box_tag 'remove_image', '1' %>
+        <%= label_tag 'remove_image', '画像を削除する' %>
+      <% rescue ActiveStorage::UnrepresentableError, ArgumentError => e %>
+        <p>※ 画像プレビューは表示できません（再アップロードしてください）</p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "投稿する", class: "submit-button" %>
   </div>
 <% end %>
+</div>

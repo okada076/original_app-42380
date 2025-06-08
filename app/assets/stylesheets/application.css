@@ -107,3 +107,60 @@
 .category-badge.harvest_report {
   background-color: #43a047;
 }
+
+
+
+/* 新規投稿画面 */
+.form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* 各フォーム項目の余白 */
+.post-form .form-group {
+  margin-bottom: 20px;
+}
+
+/* テキスト入力・セレクトなど */
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* ファイル選択 */
+.form-control-file {
+  margin-top: 8px;
+  font-size: 1rem;
+}
+
+/* 送信ボタン */
+.submit-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+/* エラーメッセージ表示 */
+#error_explanation {
+  background-color: #ffecec;
+  color: #d8000c;
+  border: 1px solid #f5c6cb;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
