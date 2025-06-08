@@ -1,9 +1,8 @@
-<h2>野菜の作り方ガイド一覧</h2>
-
-<ul>
-  <% @vegetables.each do |vegetable| %>
-    <li>
-      <%= link_to vegetable.name, vegetable_growing_steps_path(vegetable) %>
-    </li>
-  <% end %>
-</ul>
+<div class="vegetables-list-container">
+  <h1>野菜の作り方ガイド一覧</h1>
+  <ul class="vegetable-list">
+    <% @vegetables.each do |vegetable| %>
+      <li><%= link_to vegetable.name, vegetable_path(vegetable) %></li>
+    <% end %>
+  </ul>
+</div>

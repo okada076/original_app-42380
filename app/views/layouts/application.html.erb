@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OriginalApp42380</title>
+    <title>そだてログ🪴</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,19 +11,29 @@
   </head>
 
   <body>
-    <header>
-    <% if user_signed_in? %>
-      <p>こんにちは、<%= current_user.nickname %> さん</p>
-      <%= link_to 'トップページ', root_path %> |
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %> |
-      <%= link_to '投稿する', new_post_path %>  |
-      <%= link_to '作り方ガイド', vegetables_path, class: 'guide-button' %> 
-    <% else %>
-      <%= link_to 'トップページ', root_path %> |
-      <%= link_to '新規登録', new_user_registration_path %> |
-      <%= link_to 'ログイン', new_user_session_path %>
-    <% end %>
+    <header class="site-header">
+      <div class="container">
+        <div class="logo">
+          <%= link_to 'そだてログ🪴', root_path %>
+        </div>
+        <nav class="nav-menu">
+          <% if user_signed_in? %>
+            <span class="welcome-message">こんにちは、<%= current_user.nickname %> さん</span>
+            <%= link_to 'トップページ', root_path %>
+            <%= link_to '投稿する', new_post_path %>
+            <%= link_to '作り方ガイド', vegetables_path, class: 'guide-button' %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+          <% else %>
+            <%= link_to 'トップページ', root_path %>
+            <%= link_to '新規登録', new_user_registration_path %>
+            <%= link_to 'ログイン', new_user_session_path %>
+          <% end %>
+        </nav>
+      </div>
     </header>
-   <%= yield %>
+
+    <main class="main-content">
+      <%= yield %>
+    </main>
   </body>
 </html>
