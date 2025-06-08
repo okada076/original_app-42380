@@ -2,9 +2,9 @@ require 'rails_helper'
 
 def sign_in_as(user)
   visit new_user_session_path
-  fill_in 'メールアドレス', with: user.email
-  fill_in 'パスワード', with: user.password
-  click_button 'ログイン'
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+  click_button 'Log in'
 end
 
 RSpec.describe 'StepProgresses', type: :system do
@@ -28,9 +28,10 @@ RSpec.describe 'StepProgresses', type: :system do
 
     checkbox_id = "step_checkbox_#{@step1.id}"
 
+    save_and_open_page
     expect(page).to have_unchecked_field(checkbox_id)
-    check(checkbox_id)
 
+    check(checkbox_id)
     visit current_path
     expect(page).to have_checked_field(checkbox_id)
   end

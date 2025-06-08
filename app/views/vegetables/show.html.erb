@@ -4,8 +4,9 @@
   <ol>
     <% @steps.each do |step| %>
       <li>
-        <strong>STEP <%= step.step_number %>: <%= step.title %></strong><br>
-        <p><%= step.content %></p>
+      <%= check_box_tag "step_checkbox_#{step.id}", '1', progress&.checked, id: "step_checkbox_#{step.id}", onchange: "this.form.submit();" %>
+      <strong>STEP <%= step.step_number %>: <%= step.title %></strong><br>
+      <p><%= step.content %></p>
       </li>
     <% end %>
   </ol>
