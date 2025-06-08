@@ -1,0 +1,126 @@
+/* 野菜ガイド一覧の中央寄せと整え */
+.vegetables-list-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.vegetables-list-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  color: #2e7d32;
+}
+
+.vegetable-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.vegetable-list li {
+  margin: 6px 0;
+}
+
+.vegetable-list a {
+  text-decoration: none;
+  color: #388e3c;
+  font-weight: bold;
+  padding: 6px 12px;
+  border: 1px solid #c8e6c9;
+  border-radius: 6px;
+  background-color: #e8f5e9;
+  transition: background-color 0.3s;
+}
+
+.vegetable-list a:hover {
+  background-color: #c8e6c9;
+}
+
+
+
+/* 野菜の作り方手順 */
+
+.growing-guide {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+.guide-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.step-list {
+  list-style: none;
+  padding: 0;
+}
+
+.step-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.step-content {
+  margin-left: 28px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.back-link a {
+  color: #1976d2;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.step-list {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.step-label {
+  display: block;
+  cursor: pointer;
+}
+
+
+/* 通常のカード */
+.step-card {
+  background-color: #f8f9fa;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  transition: background-color 0.3s ease;
+}
+
+/* ✅ チェックされたときのスタイル */
+.step-checkbox:checked + .step-card {
+  background-color: #fff3e0; /* 薄いオレンジ */
+  border-color: #ffcc80; /* やや濃いオレンジで縁取り */
+}
