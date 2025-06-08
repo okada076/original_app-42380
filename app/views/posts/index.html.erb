@@ -18,18 +18,20 @@
 <!-- 🗂 投稿一覧 or メッセージ -->
 
 <% if @posts.any? %>
-  <% @posts.each do |post| %>
-    <div class="post-card">
-      <% if post.image.attached? %>
-        <%= image_tag url_for(post.image), width: 200, height: 200 %>
-      <% end %>
-      <p><strong>タイトル:</strong> <%= post.title %></p>
-      <p><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
-      <p><strong>カテゴリー:</strong> <%= category_label(post.category) %></p>
-      <p><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
-      <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]) %>
-    </div>
-  <% end %>
+  <div class="post-list"> <!-- 💡 追加 -->
+    <% @posts.each do |post| %>
+      <div class="post-card">
+        <% if post.image.attached? %>
+          <%= image_tag url_for(post.image), class: "post-image" %>
+        <% end %>
+        <p class="post-title"><strong>タイトル:</strong> <%= post.title %></p>
+        <p class="post-meta"><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
+        <p class="post-meta"><strong>カテゴリー:</strong> <%= category_label(post.category) %></p>
+        <p class="post-meta"><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
+        <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]), class: "post-link" %>
+      </div>
+    <% end %>
+  </div> <!-- 💡 追加 -->
 <% else %>
   <p>該当する投稿はありません。</p>
 <% end %>
