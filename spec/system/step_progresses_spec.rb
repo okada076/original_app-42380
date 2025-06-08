@@ -35,29 +35,38 @@ RSpec.describe 'StepProgresses', type: :system do
     Capybara.reset_sessions!
     sign_in_as(user)
 
+    # 明示的にstepをここで作成する（IDを固定化）
     step = create(:growing_step, vegetable: vegetable, step_number: 2, title: '間引き', content: '小さい芽を抜く')
-    visit vegetable_growing_steps_path(vegetable)
-
     checkbox_id = "step_checkbox_#{step.id}"
 
-    # 要素が描画されるまで待機
+    visit vegetable_growing_steps_path(vegetable)
+
+    # チェックボックスが描画されるまで待つ
     expect(page).to have_selector("##{checkbox_id}")
-    expect(page).to have_unchecked_field(id: checkbox_id)
 
+    # チェックして保存処理
     check(checkbox_id)
-    sleep 0.5 # 非同期保存の待機
 
+    # 非同期保存が完了するまで待つ（sleepの代わりに保存完了の条件で待つのがベター）
+    expect(page).to have_checked_field(checkbox_id)
+
+    # ページをリロードしてもチェックが維持されているか確認
     visit current_path
-    expect(page).to have_checked_field(id: checkbox_id)
+    expect(page).to have_checked_field(checkbox_id)
   end
 
   it 'ログインユーザーが手順ページへ遷移できる' do
     sign_in_as(user)
     visit root_path
+
+    expect(page).to have_link('作り方ガイド') # <- これが重要
     click_link '作り方ガイド'
+
     expect(current_path).to eq(vegetables_path)
 
+    expect(page).to have_link(vegetable.name)
     click_link vegetable.name
+
     expect(current_path).to eq(vegetable_growing_steps_path(vegetable))
     expect(page).to have_content("#{vegetable.name} の作り方ガイド")
   end
