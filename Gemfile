@@ -82,3 +82,5 @@ end
 gem 'devise'
 
 gem 'sassc-rails'
+
+gem "aws-sdk-s3", require: false
