@@ -2,10 +2,8 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.config.after_initialize do
   unless Rails.env.development?
-    if Vegetable.find_by(name: "トマト").nil?
-      puts "===> Running db:seed in production..."
-      load(Rails.root.join('db/seeds.rb'))
-    end
+    puts "===> Forcing seeds.rb in production"
+    load(Rails.root.join('db/seeds.rb'))
   end
 end
 
