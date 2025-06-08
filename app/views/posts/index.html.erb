@@ -6,7 +6,7 @@
   <% if user_signed_in? %>
     <%= link_to "マイページ", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
   <% end %>
-
+  
   <!-- 🔍 タグ検索フォーム -->
   <%= form_with url: posts_path, method: :get, local: true do %>
   <%= label_tag :tag, 'タグで検索' %>
@@ -26,7 +26,11 @@
         <% end %>
         <p class="post-title"><strong>タイトル:</strong> <%= post.title %></p>
         <p class="post-meta"><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
-        <p class="post-meta"><strong>カテゴリー:</strong> <%= category_label(post.category) %></p>
+
+        <span class="category-badge <%= post.category.to_s %>">
+         <%= category_label(post.category) %>
+        </span>
+
         <p class="post-meta"><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
         <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]), class: "post-link" %>
       </div>

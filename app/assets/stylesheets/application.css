@@ -86,3 +86,24 @@
   text-decoration: underline;
   font-weight: 500;
 }
+
+/* 投稿のカテゴリー色分け */
+.category-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.category-badge.grow_log {
+  background-color: #9e9e9e;
+}
+.category-badge.trouble_note {
+  background-color: #fb8c00;
+}
+.category-badge.harvest_report {
+  background-color: #43a047;
+}
