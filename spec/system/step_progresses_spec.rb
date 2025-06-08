@@ -19,10 +19,10 @@ RSpec.describe 'StepProgresses', type: :system do
 
   before do
     driven_by(:selenium_chrome_headless)
-    login_as(user, scope: :user)
   end
 
   it 'STEPをチェックすると、保存されてリロード後もチェックが維持されている' do
+    sign_in_as(user)
     visit vegetable_growing_steps_path(vegetable)
     checkbox_id = "step_checkbox_#{step1.id}"
     expect(page).to have_unchecked_field(checkbox_id)
@@ -33,36 +33,40 @@ RSpec.describe 'StepProgresses', type: :system do
 
   it 'チェックを入れると記録が保存される（別のSTEP表示名）' do
     Capybara.reset_sessions!
-    sign_in_as(user) # ← CapybaraでUIログイン
+    sign_in_as(user)
+
+    step = create(:growing_step, vegetable: vegetable, step_number: 2, title: '間引き', content: '小さい芽を抜く')
     visit vegetable_growing_steps_path(vegetable)
-    checkbox_id = "step_checkbox_#{step1.id}"
+
+    checkbox_id = "step_checkbox_#{step.id}"
+
+    # 要素が描画されるまで待機
+    expect(page).to have_selector("##{checkbox_id}")
     expect(page).to have_unchecked_field(id: checkbox_id)
+
     check(checkbox_id)
+    sleep 0.5 # 非同期保存の待機
+
     visit current_path
     expect(page).to have_checked_field(id: checkbox_id)
   end
 
   it 'ログインユーザーが手順ページへ遷移できる' do
-    ogin_as(user, scope: :user)
+    sign_in_as(user)
     visit root_path
     click_link '作り方ガイド'
     expect(current_path).to eq(vegetables_path)
 
-    # リンクを正確に指定
-    find("a[href='#{vegetable_growing_steps_path(vegetable)}']").click
-
+    click_link vegetable.name
     expect(current_path).to eq(vegetable_growing_steps_path(vegetable))
     expect(page).to have_content("#{vegetable.name} の作り方ガイド")
   end
 
   it '未ログインユーザーは育て方手順ページにアクセスできずログインページにリダイレクトされる' do
-    Capybara.reset_sessions! # ← Deviseのログアウト代替手段（system spec用）
-
-    vegetable = FactoryBot.create(:vegetable)
-    FactoryBot.create(:growing_step, vegetable: vegetable, step_number: 1)
-
+    Capybara.reset_sessions!
+    vegetable = create(:vegetable)
+    create(:growing_step, vegetable: vegetable, step_number: 1)
     visit vegetable_growing_steps_path(vegetable)
-
     expect(current_path).to eq new_user_session_path
     expect(page).to have_content('ログイン')
   end
