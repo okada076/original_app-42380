@@ -1,8 +1,15 @@
 /* 新規投稿画面 */
-.form-container {
+.form-container  {
   max-width: 600px;
   margin: 40px auto;
   padding: 0 16px;
+}
+
+/* ✅ 追加：見出し中央寄せ */
+.form-container h1 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 24px;
 }
 
 /* 各フォーム項目の余白 */
