@@ -7,6 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+puts Vegetable.find_by(name: "トマト").inspect
 
 [
   "トマト", "きゅうり", "にんじん", "レモン", "さつまいも",
