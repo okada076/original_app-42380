@@ -1,0 +1,17 @@
+<h2><%= @vegetable.name %>の育て方</h2>
+
+<% if @steps.any? %>
+  <ol>
+    <% @steps.each do |step| %>
+      <li>
+      <%= check_box_tag "step_checkbox_#{step.id}", '1', progress&.checked, id: "step_checkbox_#{step.id}", onchange: "this.form.submit();" %>
+      <strong>STEP <%= step.step_number %>: <%= step.title %></strong><br>
+      <p><%= step.content %></p>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <p>この野菜の育て方手順はまだ登録されていません。</p>
+<% end %>
+
+<%= link_to 'ガイド一覧に戻る', vegetables_path %>

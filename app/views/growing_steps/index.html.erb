@@ -1,0 +1,23 @@
+<h2><%= @vegetable.name %> の作り方ガイド</h2>
+
+<% if @growing_steps.any? %>
+  <% @growing_steps.each do |step| %>
+    <% progress = StepProgress.find_by(user: current_user, growing_step: step) %>
+    <div>
+      <%= form_with url: step_progresses_path, method: :post, local: true do |f| %>
+        <%= hidden_field_tag :growing_step_id, step.id %>
+        
+        <%= check_box_tag :checked, "1", progress&.checked,
+        id: "step_checkbox_#{step.id}",
+        onchange: "this.form.submit();" %>
+
+       <%= label_tag "step_checkbox_#{step.id}", "STEP #{step.step_number}: #{step.title}" %>
+      <% end %>
+      <p><%= step.content %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>育て方の手順はまだ登録されていません。</p>
+<% end %>
+
+<%= link_to '野菜一覧に戻る', vegetables_path %>

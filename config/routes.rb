@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  get 'vegetables/index'
+  get 'growing_steps/index'
   root 'posts#index'
   devise_for :users
   resources :posts
   resources :tags, only: [:show]
+  resources :step_progresses, only: [:create]
 
   get '/grow_logs', to: 'posts#index', defaults: { filter: 'grow_log' }, as: 'grow_logs'
   get '/troubles', to: 'posts#index', defaults: { filter: 'failure' }, as: 'troubles'
@@ -15,6 +18,10 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: :create
     resources :likes, only: [:create, :destroy]
+  end
+
+  resources :vegetables, only: [:index, :show] do
+    resources :growing_steps, only: [:index]
   end
 
   # Defines the root path route ("/")
