@@ -1,85 +1,95 @@
-<h1><%= @post.title %></h1>
-
-<% if params[:tag].present? || params[:filter].present? %>
-  <%= link_to '検索結果に戻る', posts_path(tag: params[:tag], filter: params[:filter]) %>
-<% end %>
-
-<% if @post.image.attached? %>
-  <%= image_tag url_for(@post.image), width: 300 %>
-<% end %>
-
-<p><strong>タグ:</strong>
-  <% if @post.tags.any? %>
-    <% @post.tags.each do |tag| %>
-      <%= link_to "##{tag.name}", posts_path(tag_name: tag.name) %>
+<div class="post-detail-container">
+  <div class="post-detail-card">
+    <% if @post.image.attached? %>
+      <div class="post-detail-image">
+        <%= image_tag url_for(@post.image), class: "detail-image" %>
+      </div>
     <% end %>
-  <% else %>
-    タグなし
-  <% end %>
-</p>
 
+    <div class="post-detail-info">
+      <h1><%= @post.title %></h1>
 
-<p><strong>本文:</strong> <%= @post.content %></p>
-<p><strong>カテゴリー:</strong> <%= category_label(@post.category) %></p>
-<p><strong>野菜名:</strong> <%= @post.vegetable.name if @post.vegetable %></p>
-<p><strong>投稿者:</strong> <%= @post.user.nickname %></p>
-<p><strong>投稿日:</strong> <%= @post.created_at.strftime("%Y年%m月%d日") %></p>
-
-<% if user_signed_in? && current_user != @post.user %>
-  <% if current_user.likes.exists?(post_id: @post.id) %>
-    <%= button_to 'いいね解除', post_like_path(@post, current_user.likes.find_by(post_id: @post.id)), method: :delete %>
-  <% else %>
-    <%= button_to 'いいね', post_likes_path(@post), method: :post %>
-  <% end %>
-<% end %>
-
-<% if @post.likes.count > 0 %>
-  <p><%= @post.likes.count %></p>
-<% end %>
-
-<% if user_signed_in? && current_user == @post.user %>
-  <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
-  <%= link_to '削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
-<% end %>
-
-<% if user_signed_in? %>
-<h3>コメント一覧</h3>
-
-<% if @comments.any? %>
-  <ul>
-    <% @comments.each do |comment| %>
-      <li>
-        <strong><%= comment.user.nickname %></strong>
-        <span>(<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>)</span><br>
-        <%= simple_format(comment.content) %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>まだコメントはありません</p>
-<% end %>
-
-<h3>コメントを投稿する</h3>
-
-<% if @comment.errors.any? %>
-  <div style="color: red; margin-bottom: 10px;">
-    <p><strong>コメントの投稿に失敗しました：</strong></p>
-    <ul>
-      <% @comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <% if params[:tag].present? || params[:filter].present? %>
+        <%= link_to '検索結果に戻る', posts_path(tag: params[:tag], filter: params[:filter]), class: "back-link" %>
       <% end %>
-    </ul>
-  </div>
-<% end %>
 
-<%= form_with model: [@post, @comment], local: true do |f| %>
-  <div>
-    <%= f.label :content, "コメント内容" %><br>
-    <%= f.text_area :content, rows: 3 %>
-  </div>
+      <p><strong>タグ:</strong>
+        <% if @post.tags.any? %>
+          <% @post.tags.each do |tag| %>
+            <%= link_to "##{tag.name}", posts_path(tag_name: tag.name), class: "tag-badge" %>
+          <% end %>
+        <% else %>
+          タグなし
+        <% end %>
+      </p>
 
-  <div>
-    <%= f.submit "投稿する" %>
+      <p><strong>本文:</strong> <%= @post.content %></p>
+      <p><strong>カテゴリー:</strong> <%= category_label(@post.category) %></p>
+      <p><strong>野菜名:</strong> <%= @post.vegetable.name if @post.vegetable %></p>
+      <p><strong>投稿者:</strong> <%= @post.user.nickname %></p>
+      <p><strong>投稿日:</strong> <%= @post.created_at.strftime("%Y年%m月%d日") %></p>
+
+      <% if user_signed_in? && current_user != @post.user %>
+        <% if current_user.likes.exists?(post_id: @post.id) %>
+          <%= button_to 'いいね解除', post_like_path(@post, current_user.likes.find_by(post_id: @post.id)), method: :delete %>
+        <% else %>
+          <%= button_to 'いいね', post_likes_path(@post), method: :post %>
+        <% end %>
+      <% end %>
+
+      <% if @post.likes.count > 0 %>
+        <p><%= @post.likes.count %></p>
+      <% end %>
+
+      <% if user_signed_in? && current_user == @post.user %>
+        <div class="post-actions">
+          <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
+          <%= link_to '削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
+        </div>
+      <% end %>
+
+      <% if user_signed_in? %>
+        <div class="comments-section">
+          <h3>コメント一覧</h3>
+          <% if @comments.any? %>
+            <ul>
+              <% @comments.each do |comment| %>
+                <li>
+                  <strong><%= comment.user.nickname %></strong>
+                  <span>(<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>)</span><br>
+                  <%= simple_format(comment.content) %>
+                </li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>まだコメントはありません</p>
+          <% end %>
+
+          <h3>コメントを投稿する</h3>
+
+          <% if @comment.errors.any? %>
+            <div style="color: red; margin-bottom: 10px;">
+              <p><strong>コメントの投稿に失敗しました：</strong></p>
+              <ul>
+                <% @comment.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= form_with model: [@post, @comment], local: true do |f| %>
+            <div>
+              <%= f.label :content, "コメント内容" %><br>
+              <%= f.text_area :content, rows: 3 %>
+            </div>
+
+            <div>
+              <%= f.submit "投稿する" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
- <% end %>
-<% end %>
+</div>
