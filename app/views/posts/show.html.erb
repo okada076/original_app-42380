@@ -23,11 +23,12 @@
         <% end %>
       </p>
 
-      <p><strong>本文:</strong> <%= @post.content %></p>
-      <p><strong>カテゴリー:</strong> <%= category_label(@post.category) %></p>
-      <p><strong>野菜名:</strong> <%= @post.vegetable.name if @post.vegetable %></p>
-      <p><strong>投稿者:</strong> <%= @post.user.nickname %></p>
-      <p><strong>投稿日:</strong> <%= @post.created_at.strftime("%Y年%m月%d日") %></p>
+      <p class="post-content"><%= @post.content %></p>
+
+      <p class="post-meta">カテゴリー：<%= category_label(@post.category) %></p>
+      <p class="post-meta">野菜名：<%= @post.vegetable.name if @post.vegetable %></p>
+      <p class="post-meta">投稿者：<%= @post.user.nickname %></p>
+      <p class="post-meta">投稿日：<%= @post.created_at.strftime("%Y年%m月%d日") %></p>
 
       <% if user_signed_in? && current_user != @post.user %>
         <% if current_user.likes.exists?(post_id: @post.id) %>
