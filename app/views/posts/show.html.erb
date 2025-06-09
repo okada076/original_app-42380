@@ -30,17 +30,16 @@
       <p class="post-meta">投稿者：<%= @post.user.nickname %></p>
       <p class="post-meta">投稿日：<%= @post.created_at.strftime("%Y年%m月%d日") %></p>
 
-      <% if user_signed_in? && current_user != @post.user %>
-        <% if current_user.likes.exists?(post_id: @post.id) %>
-          <%= button_to '🌱 取り消す', post_like_path(@post, current_user.likes.find_by(post_id: @post.id)), method: :delete, class: "like-button liked" %>
-        <% else %>
-          <%= button_to '🌱 ', post_likes_path(@post), method: :post, class: "like-button" %>
-        <% end %>
-      <% end %>
-
-      <% if @post.likes.count > 0 %>
-        <p><%= @post.likes.count %></p>
-      <% end %>
+      <div class="like-button-wrapper">
+  <% liked = current_user.likes.exists?(post_id: @post.id) %>
+  <%= button_to(
+        liked ? '🌱' : '🌱',
+        liked ? post_like_path(@post, current_user.likes.find_by(post_id: @post.id)) : post_likes_path(@post),
+        method: liked ? :delete : :post,
+        class: "like-button #{'liked' if liked}"
+      ) %>
+  <span class="like-count"><%= @post.likes.count %></span>
+</div>
 
       <% if user_signed_in? && current_user == @post.user %>
         <div class="post-actions">
