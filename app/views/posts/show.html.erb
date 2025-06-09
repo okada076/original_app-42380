@@ -9,8 +9,8 @@
     <div class="post-detail-info">
       <h1><%= @post.title %></h1>
 
-      <% if params[:tag].present? && @post.tags.exists?(name: params[:tag]) || params[:filter].present? %>
-       <%= link_to '検索結果に戻る', posts_path(tag: params[:tag], filter: params[:filter]), class: "btn btn-secondary" %>
+      <% if (params[:tag].present? && @post.tags.exists?(name: params[:tag])) || (params[:filter].present? && @post.category == params[:filter]) %>
+        <%= link_to '検索結果に戻る', posts_path(tag: params[:tag], filter: params[:filter]), class: "btn btn-secondary" %>
       <% end %>
 
       <p><strong>タグ:</strong>
