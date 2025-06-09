@@ -36,13 +36,16 @@
           <%= image_tag url_for(post.image), class: "post-image" %>
         <% end %>
         <p class="post-title"> <%= post.title %></p>
+        <p class="post-meta"><%= post.user.nickname %></p>
         <p class="post-meta"> <%= post.vegetable.name %></p>
 
-        <span class="category-badge <%= post.category.to_s %>">
-         <%= category_label(post.category) %>
-        </span>
+        <% if params[:filter] == "mine" %>
+          <span class="category-badge <%= post.category.to_s %>">
+          <%= category_label(post.category) %>
+          </span>
+      <% end %>
 
-        <p class="post-meta"><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
+        <p class="post-meta"> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
         <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]), class: "post-link" %>
       </div>
     <% end %>
