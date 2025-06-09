@@ -12,11 +12,11 @@
 
 <!-- 🔁 カテゴリー切り替えタブ -->
 <div class="filter-tabs">
-  <%= link_to "つまずきノート", posts_path(filter: "failure"), class: ("active" if params[:filter] == "failure") %> 
+  <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button #{'active' if params[:filter] == 'failure'}" %> 
   <% if user_signed_in? %>
-    <%= link_to "マイページ", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
+    <%= link_to "マイページ", posts_path(filter: "mine"), class: "filter-button #{'active' if params[:filter] == 'mine'}" %>
   <% end %>
-  
+</div>
   <!-- 🔍 タグ検索フォーム -->
   <%= form_with url: posts_path, method: :get, local: true do %>
   <%= label_tag :tag, 'タグで検索' %>
