@@ -136,3 +136,29 @@
   text-decoration: underline;
   font-size: 0.95rem;
 }
+
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+  .growing-guide {
+    padding: 10px;
+  }
+
+  .guide-title {
+    font-size: 1.4rem;
+  }
+
+  .step-label {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .step-checkbox {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+
+  .step-card {
+    padding: 12px;
+  }
+}
