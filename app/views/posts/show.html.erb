@@ -31,9 +31,9 @@
 
       <% if user_signed_in? && current_user != @post.user %>
         <% if current_user.likes.exists?(post_id: @post.id) %>
-          <%= button_to 'いいね解除', post_like_path(@post, current_user.likes.find_by(post_id: @post.id)), method: :delete %>
+          <%= button_to '🌱 取り消す', post_like_path(@post, current_user.likes.find_by(post_id: @post.id)), method: :delete, class: "like-button liked" %>
         <% else %>
-          <%= button_to 'いいね', post_likes_path(@post), method: :post %>
+          <%= button_to '🌱 ', post_likes_path(@post), method: :post, class: "like-button" %>
         <% end %>
       <% end %>
 
