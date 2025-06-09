@@ -12,11 +12,11 @@
 
 <!-- 🔁 カテゴリー切り替えタブ -->
 <div class="filter-tabs">
-  <%= link_to "つまずきノート", posts_path(filter: "failure"), class: ("active" if params[:filter] == "failure") %> 
+  <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button #{'active' if params[:filter] == 'failure'}" %> 
   <% if user_signed_in? %>
-    <%= link_to "マイページ", posts_path(filter: "mine"), class: ("active" if params[:filter] == "mine") %>
+    <%= link_to "マイページ", posts_path(filter: "mine"), class: "filter-button #{'active' if params[:filter] == 'mine'}" %>
   <% end %>
-  
+</div>
   <!-- 🔍 タグ検索フォーム -->
   <%= form_with url: posts_path, method: :get, local: true do %>
   <%= label_tag :tag, 'タグで検索' %>
@@ -35,14 +35,17 @@
         <% if post.image.attached? %>
           <%= image_tag url_for(post.image), class: "post-image" %>
         <% end %>
-        <p class="post-title"><strong>タイトル:</strong> <%= post.title %></p>
-        <p class="post-meta"><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
+        <p class="post-title"> <%= post.title %></p>
+        <p class="post-meta"><%= post.user.nickname %></p>
+        <p class="post-meta"> <%= post.vegetable.name %></p>
 
-        <span class="category-badge <%= post.category.to_s %>">
-         <%= category_label(post.category) %>
-        </span>
+        <% if params[:filter] == "mine" %>
+          <span class="category-badge <%= post.category.to_s %>">
+          <%= category_label(post.category) %>
+          </span>
+      <% end %>
 
-        <p class="post-meta"><strong>作成日:</strong> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
+        <p class="post-meta"> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
         <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]), class: "post-link" %>
       </div>
     <% end %>
