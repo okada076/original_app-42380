@@ -59,3 +59,16 @@
   margin-bottom: 24px;
   font-size: 0.95rem;
 }
+
+
+/* ▼ スマホ対応 */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 0 10px;
+  }
+
+  .submit-button {
+    width: 100%;
+    align-self: stretch;
+  }
+}
