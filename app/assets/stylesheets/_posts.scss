@@ -1,3 +1,4 @@
+
 /* 投稿一覧 */
 .post-list {
   display: grid;
@@ -126,3 +127,45 @@
   }
 }
 
+
+/* スマホ対応（最後に記述） */
+@media (max-width: 600px) {
+  .post-list {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+
+  .post-card {
+    margin-bottom: 20px;
+    padding: 12px;
+  }
+
+  .post-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .post-title {
+    font-size: 1.2rem;
+  }
+
+  .post-meta {
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  .post-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .filter-tabs a {
+    display: inline-block;
+    margin: 6px 4px;
+  }
+
+  .filter-tabs input[type="text"],
+  .filter-tabs input[type="submit"] {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+}
