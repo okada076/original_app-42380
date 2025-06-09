@@ -35,8 +35,8 @@
         <% if post.image.attached? %>
           <%= image_tag url_for(post.image), class: "post-image" %>
         <% end %>
-        <p class="post-title"><strong>タイトル:</strong> <%= post.title %></p>
-        <p class="post-meta"><strong>ユーザー名:</strong> <%= post.user.nickname %></p>
+        <p class="post-title"> <%= post.title %></p>
+        <p class="post-meta"> <%= post.vegetable.name %></p>
 
         <span class="category-badge <%= post.category.to_s %>">
          <%= category_label(post.category) %>
