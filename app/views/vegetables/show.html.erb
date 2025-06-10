@@ -2,24 +2,30 @@
   <h2 class="guide-title"><%= @vegetable.name %>の育て方</h2>
 
   <% if @steps.any? %>
-  <ol class="step-list">
-    <% @steps.each do |step| %>
-      <% progress = @progresses[step.id] %>
-      <li class="step-item">
-        <label class="step-label">
-          <%= check_box_tag "step_checkbox_#{step.id}", '1', progress&.checked, class: "step-checkbox", id: "step_checkbox_#{step.id}", onchange: "this.form.submit();" %>
-          <div class="step-card">
-            <strong>STEP <%= step.step_number %>: <%= step.title %></strong><br>
-            <p><%= step.content %></p>
-          </div>
-        </label>
-      </li>
+    <ol class="step-list">
+      <% @steps.each do |step| %>
+  <% progress = @progresses[step.id] %>
+  <li class="step-item" id="step_<%= step.id %>"> <!-- ← アンカーID追加 -->
+    <%= form_with url: step_progresses_path(anchor: "step_#{step.id}"), method: :post, local: true do |f| %> <!-- ← anchorをURLに付与 -->
+      <label class="step-label">
+        <%= f.check_box :checked, checked: progress&.checked, onchange: "this.form.submit();" %>
+        <%= f.hidden_field :growing_step_id, value: step.id %>
+
+        <div class="step-card <%= 'checked-card' if progress&.checked %>">
+          <strong>STEP <%= step.step_number %>: <%= step.title %></strong><br>
+          <p><%= step.content %></p>
+        </div>
+      </label>
     <% end %>
-  </ol>
-<% else %>
-  <p>この野菜の育て方手順はまだ登録されていません。</p>
+  </li>
 <% end %>
+    </ol>
+  <% else %>
+    <p>この野菜の育て方手順はまだ登録されていません。</p>
+  <% end %>
+
 
 <div class="back-link">
   <%= link_to 'ガイド一覧に戻る', vegetables_path, class: "back-link-text" %>
+ </div>
 </div>

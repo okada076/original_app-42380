@@ -8,13 +8,21 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user = current_user
-    if @post.save
-      redirect_to root_path, notice: '投稿が完了しました'
+   @post = Post.new(post_params)
+  @post.user = current_user
+
+  if @post.save
+    case @post.category
+    when "grow_log"
+      redirect_to grow_logs_path, notice: '投稿が完了しました'
+    when "trouble_note"
+      redirect_to troubles_path, notice: '投稿が完了しました'
     else
-      @vegetables = Vegetable.all
-      render :new
+      redirect_to root_path, notice: '投稿が完了しました'
+    end
+  else
+    @vegetables = Vegetable.all
+    render :new
     end
   end
 
