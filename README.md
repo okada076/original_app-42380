@@ -11,7 +11,7 @@
 ## URL
 https://original-app-42380.onrender.com/
 <br>ID:admin
-<br>PASS:1111
+- PASS:1111
 
 ## テスト用アカウント
 テスト用Email：test1@gmail.com
