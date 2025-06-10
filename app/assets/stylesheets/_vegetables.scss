@@ -120,11 +120,10 @@
 }
 
 /* ✅ チェックされたときのスタイル */
-.step-checkbox:checked + .step-card {
-  background-color: #fff3e0; /* 薄いオレンジ */
-  border-color: #ffcc80; /* やや濃いオレンジで縁取り */
+.checked-card {
+  background-color: #fff3e0;
+  border: 2px solid #ffcc80;
 }
-
 .back-link {
   text-align: center;
   margin-top: 30px;
