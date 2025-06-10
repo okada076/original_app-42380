@@ -10,11 +10,14 @@
 
 ## URL
 https://original-app-42380.onrender.com/
+<br>ID:admin 
+    PASS:1111
 
 ## テスト用アカウント
-テスト用Email：test1@test.com
+テスト用Email：test1@gmail.com
 <br>テスト用Password：abc123
-<br>Basic認証  ID:admin  PASS:1111
+<br>Basic認証  ID:admin  
+               PASS:1111
 
 ## 利用方法
 1. URLにアクセスし、ヘッダー右上の「ログイン」ボタンからログイン画面に移動します。
