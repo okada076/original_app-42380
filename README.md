@@ -44,7 +44,7 @@ https://original-app-42380.onrender.com/
 
 |![投稿機能のGIF]([![Image from Gyazo](https://i.gyazo.com/47f69102bfbb1b3b5a615d5b885987b8.gif)](https://gyazo.com/47f69102bfbb1b3b5a615d5b885987b8)[![Image from Gyazo](https://i.gyazo.com/aa6cf29331c5e3995e0cbaaa6e807b06.gif)](https://gyazo.com/aa6cf29331c5e3995e0cbaaa6e807b06))|ツイート機能<br>・投稿機能<br>・一覧機能<br>・詳細機能<br>・編集・削除機能|
 
-|![コメント機能のGIF]([![Image from Gyazo](https://i.gyazo.com/e05162f83e3f19566a14835d5076030d.gif)](https://gyazo.com/e05162f83e3f19566a14835d5076030d))|コメント機能・いいね機能|
+| [![コメント機能のGIF](https://i.gyazo.com/e05162f83e3f19566a14835d5076030d.gif)](https://gyazo.com/e05162f83e3f19566a14835d5076030d) | コメント機能・いいね機能 |
 
 |![検索機能のGIF]([![Image from Gyazo](https://i.gyazo.com/380258a834eda00d64abd51735b939e2.gif)](https://gyazo.com/380258a834eda00d64abd51735b939e2))|タグ検索機能|
 
