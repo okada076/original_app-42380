@@ -23,17 +23,21 @@ RSpec.describe 'StepProgresses', type: :system do
 
   it 'STEPをチェックすると、保存されてリロード後もチェックが維持されている', js: true do
   sign_in_as(user)
+
+  step = create(:growing_step, vegetable: vegetable, step_number: 1)
+  checkbox_id = "step_checkbox_#{step.id}"
+  puts "Generated checkbox_id: #{checkbox_id}"
+
   visit vegetable_growing_steps_path(vegetable)
 
-  checkbox_id = "step_checkbox_#{step1.id}"
-
-  # チェックボックスが表示されるまで待つ
-  expect(page).to have_selector("##{checkbox_id}.saved")
-
-  # チェック前に未チェック状態を確認
+  expect(page).to have_selector("##{checkbox_id}", wait: 5)
   expect(page).to have_unchecked_field(checkbox_id)
 
   check(checkbox_id)
+
+  sleep 1 # JSによる非同期処理を待つ
+
+  expect(page).to have_selector("##{checkbox_id}.saved", wait: 5)
   expect(page).to have_checked_field(checkbox_id)
 
   visit current_path
