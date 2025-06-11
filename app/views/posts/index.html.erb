@@ -1,68 +1,71 @@
-<div class="post-header">
-<h1>
-  <% case params[:filter] %>
-  <% when "failure" %>
-    📝 つまずきノート一覧
-  <% when "mine" %>
-    👤マイページ
-  <% else %>
-    📸育成記録一覧
-  <% end %>
-</h1>
-
-<!-- 🔁 カテゴリー切り替えタブ -->
-<div class="filter-tabs">
-  <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button #{'active' if params[:filter] == 'failure'}" %> 
-  <% if user_signed_in? %>
-    <%= link_to "マイページ", posts_path(filter: "mine"), class: "filter-button #{'active' if params[:filter] == 'mine'}" %>
-  <% end %>
-</div>
-  <!-- 🔍 タグ検索フォーム -->
-  <%= form_with url: posts_path, method: :get, local: true do %>
-  <%= label_tag :tag, 'タグで検索' %>
-  <%= text_field_tag :tag, params[:tag] %>
-  <%= hidden_field_tag :filter, params[:filter] %>
-  <%= submit_tag '検索' %>
-<% end %>
-</div>
-
-<!-- 🗂 投稿一覧 or メッセージ -->
-
-<% if @posts.any? %>
-  <div class="post-list"> 
-    <% @posts.each do |post| %>
-      <div class="post-card">
-        <% if post.image.attached? %>
-          <%= image_tag url_for(post.image), class: "post-image" %>
+<div class="main-layout">
+  <!-- 🔹 左カラム：サイドバー -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>作り方ガイド</h3>
+      <ul class="vegetable-list">
+        <% @vegetables.each do |vegetable| %>
+          <li>
+            <%= link_to vegetable.name, vegetable_path(vegetable) %>
+          </li>
         <% end %>
-        <p class="post-title"> <%= post.title %></p>
-        <p class="post-meta"><%= post.user.nickname %></p>
-        <p class="post-meta"> <%= post.vegetable.name %></p>
+      </ul>
+    </div>
+  </aside>
 
-        <% if params[:filter] == "mine" %>
-          <span class="category-badge <%= post.category.to_s %>">
-          <%= category_label(post.category) %>
-          </span>
-      <% end %>
+  <!-- ✅ 右：今までの投稿表示 -->
+  <section class="main-content">
+    <div class="post-header">
+      <h1>
+        <% case params[:filter] %>
+        <% when "failure" %>
+          📝 つまずきノート一覧
+        <% when "mine" %>
+          👤マイページ
+        <% else %>
+          📸育成記録一覧
+        <% end %>
+      </h1>
 
-        <p class="post-meta"> <%= post.created_at.strftime("%Y年%m月%d日") %></p>
-        <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]), class: "post-link" %>
+      <div class="filter-tabs">
+        <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button #{'active' if params[:filter] == 'failure'}" %> 
+        <% if user_signed_in? %>
+          <%= link_to "マイページ", posts_path(filter: "mine"), class: "filter-button #{'active' if params[:filter] == 'mine'}" %>
+        <% end %>
       </div>
+
+      <%= form_with url: posts_path, method: :get, local: true do %>
+        <%= label_tag :tag, 'タグで検索' %>
+        <%= text_field_tag :tag, params[:tag] %>
+        <%= hidden_field_tag :filter, params[:filter] %>
+        <%= submit_tag '検索' %>
+      <% end %>
+    </div>
+
+    <% if @posts.any? %>
+      <div class="post-list"> 
+        <% @posts.each do |post| %>
+          <div class="post-card">
+            <% if post.image.attached? %>
+              <%= image_tag url_for(post.image), class: "post-image" %>
+            <% end %>
+            <p class="post-title"><%= post.title %></p>
+            <p class="post-meta"><%= post.user.nickname %></p>
+            <p class="post-meta"><%= post.vegetable.name %></p>
+
+            <% if params[:filter] == "mine" %>
+              <span class="category-badge <%= post.category.to_s %>">
+                <%= category_label(post.category) %>
+              </span>
+            <% end %>
+
+            <p class="post-meta"><%= post.created_at.strftime("%Y年%m月%d日") %></p>
+            <%= link_to '詳細を見る', post_path(post, tag: params[:tag], filter: params[:filter]), class: "post-link" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>該当する投稿はありません。</p>
     <% end %>
-  </div> <!-- 💡 追加 -->
-<% else %>
-  <p>該当する投稿はありません。</p>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </section>
+</div>

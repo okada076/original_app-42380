@@ -153,6 +153,47 @@
   }
 }
 
+.main-layout {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 24px;
+  gap: 32px;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+}
+
+.vegetable-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: block;
+  text-align: center;
+}
+
+.vegetable-list li {
+  margin-bottom: 10px;
+}
+
+.vegetable-list a {
+  display: inline-block;          
+  padding: 8px 20px;
+  background-color: #e0f2f1;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #2e7d32;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  min-width: 120px;      
+}
+
+.vegetable-list a:hover {
+  background-color: #b2dfdb;
+}
 
 /* スマホ対応（最後に記述） */
 @media (max-width: 600px) {

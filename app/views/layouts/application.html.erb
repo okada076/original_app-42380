@@ -21,7 +21,6 @@
         <span class="welcome-message">こんにちは、<%= current_user.nickname %> さん</span>
         <%= link_to 'トップページ', root_path %>
         <%= link_to '投稿する✏️', new_post_path %>
-        <%= link_to '作り方ガイド🍅', vegetables_path, class: 'guide-button' %>
         <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
       <% else %>
         <%= link_to 'トップページ', root_path %>
