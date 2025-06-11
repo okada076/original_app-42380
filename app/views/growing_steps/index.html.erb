@@ -1,18 +1,20 @@
 <h2><%= @vegetable.name %> の作り方ガイド</h2>
 
 <% if @growing_steps.any? %>
+ <div data-controller="step-progress">
   <% @growing_steps.each do |step| %>
     <% progress = StepProgress.find_by(user: current_user, growing_step: step) %>
     <div>
-      <%= form_with url: step_progresses_path, method: :post, local: true do |f| %>
-        <%= hidden_field_tag :growing_step_id, step.id %>
-        
-        <%= check_box_tag :checked, "1", progress&.checked,
-        id: "step_checkbox_#{step.id}",
-        onchange: "this.form.submit();" %>
+      <!-- チェックボックスに Stimulus 用の data 属性を追加 -->
+        <%= check_box_tag nil, "1", progress&.checked,
+          id: "step_checkbox_#{step.id}",
+          data: {
+          step_progress_target: "checkbox",
+          step_id: step.id
+           },
+           type: "checkbox" %>
 
        <%= label_tag "step_checkbox_#{step.id}", "STEP #{step.step_number}: #{step.title}" %>
-      <% end %>
       <p><%= step.content %></p>
     </div>
   <% end %>

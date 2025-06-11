@@ -3,11 +3,16 @@ class StepProgressesController < ApplicationController
 
   def create
     progress = StepProgress.find_or_initialize_by(
-      user: current_user,
-      growing_step_id: params[:growing_step_id]
-    )
-    progress.checked = params[:checked] == '1'
-    progress.save
-    redirect_back fallback_location: root_path
+    user: current_user,
+    growing_step_id: params[:growing_step_id]
+  )
+
+  progress.checked = ActiveModel::Type::Boolean.new.cast(params[:checked])
+
+  if progress.save
+    head :ok
+  else
+    head :unprocessable_entity
   end
+ end
 end
