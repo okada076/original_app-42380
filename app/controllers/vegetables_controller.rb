@@ -1,4 +1,6 @@
 class VegetablesController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :show]
+  
   def index
     @vegetables = Vegetable.all
   end

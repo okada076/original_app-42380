@@ -1,23 +1,25 @@
 <h2><%= @vegetable.name %> の作り方ガイド</h2>
 
 <% if @growing_steps.any? %>
- <div data-controller="step-progress">
-  <% @growing_steps.each do |step| %>
-    <% progress = StepProgress.find_by(user: current_user, growing_step: step) %>
-    <div>
-      <!-- チェックボックスに Stimulus 用の data 属性を追加 -->
-        <%= check_box_tag nil, "1", progress&.checked,
+  <div data-controller="step-progress">
+    <% @growing_steps.each do |step| %>
+      <% progress = StepProgress.find_by(user: current_user, growing_step: step) %>
+
+      <div class="step-label">
+        <%= check_box_tag "step_checkbox_#{step.id}", "1", progress&.checked,
           id: "step_checkbox_#{step.id}",
           data: {
-          step_progress_target: "checkbox",
-          step_id: step.id
-           },
-           type: "checkbox" %>
+            step_progress_target: "checkbox",
+            step_id: step.id
+          } %>
 
-       <%= label_tag "step_checkbox_#{step.id}", "STEP #{step.step_number}: #{step.title}" %>
-      <p><%= step.content %></p>
-    </div>
-  <% end %>
+        <div class="step-card">
+          <%= label_tag "step_checkbox_#{step.id}", "STEP #{step.step_number}: #{step.title}" %>
+          <p><%= step.content %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   <p>育て方の手順はまだ登録されていません。</p>
 <% end %>

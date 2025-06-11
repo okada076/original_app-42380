@@ -34,6 +34,7 @@ export default class extends Controller {
     })
       .then(response => {
         if (response.ok) {
+          checkbox.classList.add("saved");
           console.log("保存成功")
         } else {
           console.error("保存失敗", response.status)
