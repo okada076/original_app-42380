@@ -14,6 +14,13 @@ export default class extends Controller {
     const stepId = checkbox.dataset.stepId
     const checked = checkbox.checked
 
+    const stepCard = checkbox.closest(".step-label").querySelector(".step-card")
+  if (checked) {
+    stepCard.classList.add("checked-card")
+  } else {
+    stepCard.classList.remove("checked-card")
+  }
+
     fetch("/step_progresses", {
       method: "POST",
       headers: {
