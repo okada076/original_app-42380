@@ -8,12 +8,30 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-[
-  "トマト", "きゅうり", "にんじん", "レモン", "さつまいも",
-  "なす", "カボチャ", "すだち", "じゃがいも", "レタス", "その他"
-].each do |name|
-  Vegetable.find_or_create_by!(name: name)
+vegetables = [
+  { name: "トマト", category: "果菜類" },
+  { name: "きゅうり", category: "果菜類" },
+  { name: "なす", category: "果菜類" },
+  { name: "カボチャ", category: "果菜類" },
+
+  { name: "にんじん", category: "根菜類" },
+  { name: "さつまいも", category: "根菜類" },
+  { name: "じゃがいも", category: "根菜類" },
+
+  { name: "レモン", category: "果実類" },
+  { name: "すだち", category: "果実類" },
+
+  { name: "レタス", category: "葉菜類" },
+
+  { name: "その他", category: "その他" }
+]
+
+vegetables.each do |v|
+  veg = Vegetable.find_or_initialize_by(name: v[:name])
+  veg.category = v[:category]
+  veg.save!
 end
+
 
 # === トマトの作り方手順データを追加 ===
 # トマトのIDを取得（既に登録済み前提）
