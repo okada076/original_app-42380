@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :tag do
-    name { 'トマト' }
+     name { "タグ#{SecureRandom.hex(4)}" }
   end
 end

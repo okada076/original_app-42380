@@ -94,44 +94,40 @@ RSpec.describe 'Posts', type: :request do
   end
 
   describe 'GET /tags/:id (タグ検索)' do
-    let!(:tomato_tag) { create(:tag, name: 'トマト') }
-    let!(:carrot_tag) { create(:tag, name: 'にんじん') }
+  before(:all) do
+    @tag_tomato = create(:tag, name: 'トマト')
+    @tag_carrot = create(:tag, name: 'にんじん')
+    @tag_piman  = create(:tag, name: 'ピーマン')
 
-    let!(:grow_post) do
-      post = create(:post, title: '発芽しました', category: 'grow_log')
-      post.tags << tomato_tag
-      post
-    end
+    @grow_post = create(:post, title: '発芽しましたA', category: 'grow_log')
+    @grow_post.tags << @tag_tomato
 
-    let!(:trouble_post) do
-      post = create(:post, title: '枯れました', category: 'trouble_note')
-      post.tags << carrot_tag
-      post
-    end
-
-    it 'タグで絞り込める（トマト）' do
-      get tag_path(tomato_tag)
-      expect(response.body).to include(grow_post.title)
-      expect(response.body).not_to include(trouble_post.title)
-    end
-
-    it 'カテゴリ＋タグで絞り込める（トマト＋育成記録）' do
-      get tag_path(tomato_tag), params: { filter: 'grow_log' }
-      expect(response.body).to include(grow_post.title)
-      expect(response.body).not_to include(trouble_post.title)
-    end
-
-    it 'カテゴリ＋タグで絞り込める（にんじん＋つまずき）' do
-      get tag_path(carrot_tag), params: { filter: 'failure' }
-      expect(response.body).to include(trouble_post.title)
-      expect(response.body).not_to include(grow_post.title)
-    end
-
-    it 'タグが存在しない場合は投稿が表示されない' do
-      unknown_tag = create(:tag, name: 'ピーマン')
-      get tag_path(unknown_tag)
-      expect(response.body).not_to include(grow_post.title)
-      expect(response.body).not_to include(trouble_post.title)
-    end
+    @trouble_post = create(:post, title: '枯れましたB', category: 'trouble_note')
+    @trouble_post.tags << @tag_carrot
   end
+
+  it 'タグで絞り込める（トマト）' do
+    get tag_path(@tag_tomato)
+    expect(response.body).to include(@grow_post.title)
+    expect(response.body).not_to include(@trouble_post.title)
+  end
+
+  it 'カテゴリ＋タグで絞り込める（トマト＋育成記録）' do
+    get tag_path(@tag_tomato), params: { filter: 'grow_log' }
+    expect(response.body).to include(@grow_post.title)
+    expect(response.body).not_to include(@trouble_post.title)
+  end
+
+  it 'カテゴリ＋タグで絞り込める（にんじん＋つまずき）' do
+    get tag_path(@tag_carrot), params: { filter: 'trouble_note' }
+    expect(response.body).to include(@trouble_post.title)
+    expect(response.body).not_to include(@grow_post.title)
+  end
+
+  it 'タグが存在しない場合は投稿が表示されない' do
+    get tag_path(@tag_piman)
+    expect(response.body).not_to include(@grow_post.title)
+    expect(response.body).not_to include(@trouble_post.title)
+  end
+end
 end
