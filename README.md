@@ -41,13 +41,13 @@ PASS: 1111
 ## 実装した機能についての画像やGIFおよびその説明
 |ページ|説明|
 |---|------------------|
-|![トップページ(育成記録)のGIF]([![Image from Gyazo](https://i.gyazo.com/ec291e7e156493bb8add72afe1fcea23.jpg)](https://gyazo.com/ec291e7e156493bb8add72afe1fcea23))|トップページ　　　　　　　　　　　　　　　　　　　　　　|
+|![トップページ(育成記録)のGIF]([![Image from Gyazo](https://i.gyazo.com/939f523abce131ff0b2b19757c3cd49f.jpg)](https://gyazo.com/939f523abce131ff0b2b19757c3cd49f))|トップページ　　　　　　　　　　　　　　　　　　　　　　|
 |![つまずきノート一覧のGIF]([![Image from Gyazo](https://i.gyazo.com/453060176c255d8726706bf6d16a6eb8.gif)](https://gyazo.com/453060176c255d8726706bf6d16a6eb8))|投稿一覧機能|
 |![ユーザー機能のGIF](([![Image from Gyazo](https://i.gyazo.com/2f9a39091248b9862a516af569fcd0a1.gif)](https://gyazo.com/2f9a39091248b9862a516af569fcd0a1))|ユーザー機能<br>・新規登録<br>・ログイン/ログアウト
 |![投稿機能のGIF]([![Image from Gyazo](https://i.gyazo.com/47f69102bfbb1b3b5a615d5b885987b8.gif)](https://gyazo.com/47f69102bfbb1b3b5a615d5b885987b8)[![Image from Gyazo](https://i.gyazo.com/aa6cf29331c5e3995e0cbaaa6e807b06.gif)](https://gyazo.com/aa6cf29331c5e3995e0cbaaa6e807b06))|ツイート機能<br>・投稿機能<br>・一覧機能<br>・詳細機能<br>・編集・削除機能|
 |![コメント機能のGIF]([![Image from Gyazo](https://i.gyazo.com/fc334d4a2fc7b4be0cbb039ecc377d05.gif)](https://gyazo.com/fc334d4a2fc7b4be0cbb039ecc377d05)) | コメント機能・いいね機能 |
 |![検索機能のGIF]([![Image from Gyazo](https://i.gyazo.com/0e8161864245c582c42f9f999b7520bd.gif)](https://gyazo.com/0e8161864245c582c42f9f999b7520bd))|タグ検索機能|
-|![野菜の作り方ガイドのGIF]([![Image from Gyazo](https://i.gyazo.com/354244632d7f7d990a67d17b28dcb0d9.gif)](https://gyazo.com/354244632d7f7d990a67d17b28dcb0d9))|作り方ガイド機能|
+|![野菜の作り方ガイドのGIF]([![Image from Gyazo](https://i.gyazo.com/e6553b419fdab8c0ed6cf5b9794bff2d.gif)](https://gyazo.com/e6553b419fdab8c0ed6cf5b9794bff2d))|作り方ガイド機能|
 
 ## 実装予定の機能
 - ユーザー同士のフォロー機能
