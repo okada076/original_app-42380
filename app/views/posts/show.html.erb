@@ -9,10 +9,6 @@
     <div class="post-detail-info">
       <h1><%= @post.title %></h1>
 
-      <% if params[:search].present? %>
-  <%= link_to '検索結果に戻る', posts_path(tag: params[:tag], filter: params[:filter]), class: "btn btn-secondary" %>
-<% end %>
-
       <p><strong>タグ:</strong>
         <% if @post.tags.any? %>
           <% @post.tags.each do |tag| %>
@@ -30,28 +26,27 @@
       <p class="post-meta">投稿者：<%= @post.user.nickname %></p>
       <p class="post-meta">投稿日：<%= @post.created_at.strftime("%Y年%m月%d日") %></p>
 
-     <div class="like-button-wrapper">
-  <% if user_signed_in? %>
-    <% liked = current_user.likes.exists?(post_id: @post.id) %>
-    <%= button_to(
-          liked ? '🌱' : '🌱',
-          liked ? post_like_path(@post, current_user.likes.find_by(post_id: @post.id)) : post_likes_path(@post),
-          method: liked ? :delete : :post,
-          class: "like-button #{'liked' if liked}"
-        ) %>
-  <% else %>
-    <span class="like-button-disabled">🌱</span>
-  <% end %>
-  <span class="like-count"><%= @post.likes.count %></span>
-</div>
+      <div class="like-button-wrapper">
+        <% if user_signed_in? %>
+          <% liked = current_user.likes.exists?(post_id: @post.id) %>
+          <%= button_to(
+                liked ? '🌱' : '🌱',
+                liked ? post_like_path(@post, current_user.likes.find_by(post_id: @post.id)) : post_likes_path(@post),
+                method: liked ? :delete : :post,
+                class: "like-button #{'liked' if liked}"
+              ) %>
+        <% else %>
+          <span class="like-button-disabled">🌱</span>
+        <% end %>
+        <span class="like-count"><%= @post.likes.count %></span>
+      </div>
 
-
-<% if user_signed_in? && current_user == @post.user %>
-  <div class="post-actions">
-    <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
-    <%= link_to '削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
-  </div>
-<% end %>
+      <% if user_signed_in? && current_user == @post.user %>
+        <div class="post-actions">
+          <%= link_to '編集', edit_post_path(@post), class: 'btn btn-primary' %>
+          <%= link_to '削除', post_path(@post), data: { turbo_method: :delete }, class: 'btn btn-danger' %>
+        </div>
+      <% end %>
 
       <% if user_signed_in? %>
         <div class="comments-section">
@@ -95,6 +90,13 @@
           <% end %>
         </div>
       <% end %>
+
+      <% if params[:search].present? %>
+        <div class="back-to-search" style="margin-top: 30px; text-align: center;">
+          <%= link_to '検索結果に戻る', posts_path(tag: params[:tag], filter: params[:filter]), class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+
     </div>
   </div>
 </div>
