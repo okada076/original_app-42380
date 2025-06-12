@@ -24,6 +24,9 @@ Rails.application.routes.draw do
     resources :growing_steps, only: [:index]
   end
 
+  namespace :admin do
+  post 'run_seed', to: 'seeds#run'
+  end
   # Defines the root path route ("/")
   # root "posts#index"
 end
