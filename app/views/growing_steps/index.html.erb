@@ -1,21 +1,25 @@
 <h2><%= @vegetable.name %> の作り方ガイド</h2>
 
 <% if @growing_steps.any? %>
-  <% @growing_steps.each do |step| %>
-    <% progress = StepProgress.find_by(user: current_user, growing_step: step) %>
-    <div>
-      <%= form_with url: step_progresses_path, method: :post, local: true do |f| %>
-        <%= hidden_field_tag :growing_step_id, step.id %>
-        
-        <%= check_box_tag :checked, "1", progress&.checked,
-        id: "step_checkbox_#{step.id}",
-        onchange: "this.form.submit();" %>
+  <div data-controller="step-progress">
+    <% @growing_steps.each do |step| %>
+      <% progress = StepProgress.find_by(user: current_user, growing_step: step) %>
 
-       <%= label_tag "step_checkbox_#{step.id}", "STEP #{step.step_number}: #{step.title}" %>
-      <% end %>
-      <p><%= step.content %></p>
-    </div>
-  <% end %>
+      <div class="step-label">
+        <%= check_box_tag "step_checkbox_#{step.id}", "1", progress&.checked,
+          id: "step_checkbox_#{step.id}",
+          data: {
+            step_progress_target: "checkbox",
+            step_id: step.id
+          } %>
+
+        <div class="step-card">
+          <%= label_tag "step_checkbox_#{step.id}", "STEP #{step.step_number}: #{step.title}" %>
+          <p><%= step.content %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% else %>
   <p>育て方の手順はまだ登録されていません。</p>
 <% end %>

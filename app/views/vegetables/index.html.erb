@@ -1,8 +1,14 @@
-<div class="vegetables-list-container">
-  <h1>野菜の作り方ガイド一覧</h1>
-  <ul class="vegetable-list">
-    <% @vegetables.each do |vegetable| %>
-      <li><%= link_to vegetable.name, vegetable_path(vegetable) %></li>
-    <% end %>
-  </ul>
-</div>
+<%# <div class="container">
+  <h2 class="title">野菜の作り方ガイド一覧</h2>
+
+  <% @vegetables.group_by(&:category).each do |category, veggies| %>
+    <%# <div class="category">
+      <h3><%= category %><%# </h3>
+      <%# <div class="button-group">
+        <% veggies.each do |vegetable| %>
+         <%#  <%= link_to vegetable.name, vegetable_path(vegetable), class: "tag #{category_class(vegetable.category)}" %>
+       <%#  <% end %>
+     <%#  </div>
+    </div>
+  <% end %>
+<%# </div>

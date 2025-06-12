@@ -43,6 +43,8 @@ class PostsController < ApplicationController
     @posts = @posts.joins(:tags).where(tags: { name: params[:tag] }).distinct if params[:tag].present?
 
     @posts = @posts.order(created_at: :desc)
+
+    @vegetables = Vegetable.order(:name)
   end
 
   def show

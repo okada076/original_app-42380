@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
 
-  resources :vegetables, only: [:index, :show] do
+  resources :vegetables, only: [:show] do
     resources :growing_steps, only: [:index]
   end
 

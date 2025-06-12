@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :vegetable do
-    name { 'MyString' }
+   name { "野菜#{SecureRandom.hex(4)}" }
   end
 end

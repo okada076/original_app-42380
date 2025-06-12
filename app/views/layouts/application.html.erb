@@ -11,26 +11,25 @@
   </head>
 
   <body>
-    <header class="site-header">
-      <div class="container">
-        <div class="logo">
-          <%= link_to 'そだてログ🪴', root_path %>
-        </div>
-        <nav class="nav-menu">
-          <% if user_signed_in? %>
-            <span class="welcome-message">こんにちは、<%= current_user.nickname %> さん</span>
-            <%= link_to 'トップページ', root_path %>
-            <%= link_to '投稿する', new_post_path %>
-            <%= link_to '作り方ガイド', vegetables_path, class: 'guide-button' %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
-          <% else %>
-            <%= link_to 'トップページ', root_path %>
-            <%= link_to '新規登録', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
-          <% end %>
-        </nav>
-      </div>
-    </header>
+   <header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <%= link_to 'そだてログ🪴', root_path %>
+    </div>
+    <nav class="nav-menu">
+      <% if user_signed_in? %>
+        <span class="welcome-message">こんにちは、<%= current_user.nickname %> さん</span>
+        <%= link_to 'トップページ', root_path %>
+        <%= link_to '投稿する✏️', new_post_path %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+      <% else %>
+        <%= link_to 'トップページ', root_path %>
+        <%= link_to '新規登録', new_user_registration_path %>
+        <%= link_to 'ログイン', new_user_session_path %>
+      <% end %>
+    </nav>
+  </div>
+</header>
 
     <main class="main-content">
       <%= yield %>
