@@ -2,6 +2,6 @@
 
 <% @posts.each do |post| %>
   <div>
-    <%= link_to post.title, post_path(post) %>（<%= post.user.nickname %>）
+    <%= link_to post.title, post_path(post, tag: params[:tag], filter: params[:filter], search: true) %>
   </div>
 <% end %>
