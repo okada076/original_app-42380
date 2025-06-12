@@ -8,4 +8,3 @@ class Admin::SeedsController < ApplicationController
       render plain: "✅ seeds.rb 実行完了"
     end
   end
-end
