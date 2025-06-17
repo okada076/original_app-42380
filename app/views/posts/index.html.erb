@@ -43,29 +43,32 @@
     </div>
 
     <% if @posts.any? %>
-      <div class="post-list"> 
-        <% @posts.each do |post| %>
-          <div class="post-card">
-            <% if post.image.attached? %>
-              <%= image_tag url_for(post.image), class: "post-image" %>
-            <% end %>
-            <p class="post-title"><%= post.title %></p>
-            <p class="post-meta"><%= post.user.nickname %></p>
-            <p class="post-meta"><%= post.vegetable.name %></p>
-
-            <% if params[:filter] == "mine" %>
-              <span class="category-badge <%= post.category.to_s %>">
-                <%= category_label(post.category) %>
-              </span>
-            <% end %>
-
-            <% link_params = { filter: params[:filter] } %>
-            <% link_params[:tag] = params[:tag] if params[:tag].present? %>
-            <% link_params[:search] = true if params[:tag].present? %>
-             <%= link_to '詳細を見る', post_path(post, link_params), class: "post-link" %>
-          </div>
+      <div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <% if post.image.attached? %>
+          <%= image_tag url_for(post.image), class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
         <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-subtitle text-muted mb-2">
+            <%= post.user.nickname %> | <%= post.vegetable.name %>
+          </p>
+
+          <% if params[:filter] == "mine" %>
+            <span class="badge bg-secondary"><%= category_label(post.category) %></span>
+          <% end %>
+
+          <% link_params = { filter: params[:filter] } %>
+          <% link_params[:tag] = params[:tag] if params[:tag].present? %>
+          <% link_params[:search] = true if params[:tag].present? %>
+          <%= link_to '詳細を見る', post_path(post, link_params), class: "btn btn-outline-success mt-3 w-100" %>
+        </div>
       </div>
+    </div>
+  <% end %>
+</div>
     <% else %>
       <p>該当する投稿はありません。</p>
     <% end %>
