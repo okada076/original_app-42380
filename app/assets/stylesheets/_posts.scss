@@ -1,15 +1,14 @@
 
 /* 投稿一覧 */
-.post-list {
+ /*.post-list{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr); 
   gap: 20px;
-  max-width: 960px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
+  width: 100%;                     
+  margin: 0 auto; 
+} */
 
-.post-card {
+/*.post-card {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -17,7 +16,7 @@
   padding: 10px;
   transition: box-shadow 0.3s;
   text-align: center;
-}
+} */
 
 .post-card:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -50,6 +49,22 @@
   text-decoration: underline;
   font-weight: 500;
 }
+
+.post-thumbnail {
+  max-height: 200px;
+  object-fit: cover;
+}
+
+section.post-main {
+  width: 100% !important;
+  padding: 0 !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+
+
+
 
 /* つまずきノート、マイページへのリンクボタン */
 .filter-button {
@@ -155,10 +170,9 @@
 
 .main-layout {
   display: flex;
-  justify-content: flex-start;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 24px;
+  max-width: 1500px;
+  margin: 0 auto;
+  width: 100%;
   gap: 32px;
 }
 
@@ -218,6 +232,7 @@
     text-align: center;            // ← 追加：内部リンクも中央寄せ
   }
 
+  
   .post-list {
     grid-template-columns: 1fr;
     padding: 0 10px;
