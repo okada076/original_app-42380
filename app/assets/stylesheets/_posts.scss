@@ -1,22 +1,26 @@
 
-/* 投稿一覧 */
- /*.post-list{
+/* 投稿一覧グリッド */
+.post-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 20px;
-  width: 100%;                     
-  margin: 0 auto; 
-} */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  justify-content: center;
+}
 
-/*.post-card {
+/* 投稿カード */
+.post-card {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 10px;
-  transition: box-shadow 0.3s;
-  text-align: center;
-} */
+}
 
 .post-card:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
