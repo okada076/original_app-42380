@@ -1,13 +1,17 @@
 
-/* 投稿一覧グリッド */
+.post-main {
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 .post-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 24px;
-  max-width: 1000px;
-  margin: 0 auto;
+  width: 100%;
   padding: 20px;
-  justify-content: center;
 }
 
 /* 投稿カード */
@@ -58,14 +62,6 @@
   max-height: 200px;
   object-fit: cover;
 }
-
-section.post-main {
-  width: 100% !important;
-  padding: 0 !important;
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-}
-
 
 
 
