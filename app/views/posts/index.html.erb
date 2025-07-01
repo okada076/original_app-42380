@@ -54,11 +54,13 @@
         <h5 class="post-title"><%= post.title %></h5>
         <p class="post-meta"><%= post.user.nickname %>｜<%= post.vegetable.name %></p>
 
-        <% if post.grow_log? %>
-         <span class="category-badge grow_log">育成記録</span>
-        <% elsif post.trouble_note? %>
-         <span class="category-badge trouble_note">つまづきノート</span>
-        <% end %>
+        <% if params[:filter] == "mine" %>
+  <% if post.grow_log? %>
+    <span class="category-badge grow_log">育成記録</span>
+  <% elsif post.trouble_note? %>
+    <span class="category-badge trouble_note">つまづきノート</span>
+  <% end %>
+<% end %>
 
         <%= link_to '詳細を見る', post_path(post), class: "btn btn-outline-success btn-sm mt-2 w-100" %>
       </div>
