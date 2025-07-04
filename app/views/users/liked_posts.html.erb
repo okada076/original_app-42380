@@ -4,7 +4,7 @@
   <% @liked_posts.each do |post| %>
     <div class="post-card">
       <%= link_to post.title, post_path(post) %>
-      <p>投稿者: <%= post.user.name %></p>
+      <p>投稿者: <%= post.user.nickname %></p>
       <p>野菜: <%= post.vegetable.name %></p>
     </div>
   <% end %>
