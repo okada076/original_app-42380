@@ -32,22 +32,21 @@
       <% end %>
 
       <div class="filter-tabs">
-        <% unless params[:filter] == 'failure' %>
-          <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button" %>
-        <% end %>
+  <% unless params[:filter] == 'failure' %>
+    <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button" %>
+  <% end %>
 
-        <% if user_signed_in? && params[:filter] != 'mine' %>
-          <%= link_to "マイページ", posts_path(filter: "mine"), class: "filter-button" %>
-        <% end %>
-      </div>
+  <% if user_signed_in? && params[:filter] != 'mine' %>
+    <%= link_to "マイページ", posts_path(filter: "mine"), class: "filter-button" %>
+  <% end %>
 
-      <%= form_with url: posts_path, method: :get, local: true do %>
-        <%= label_tag :tag, 'タグで検索' %>
-        <%= text_field_tag :tag, params[:tag] %>
-        <%= hidden_field_tag :filter, params[:filter] %>
-        <%= submit_tag '検索' %>
-      <% end %>
-    </div>
+  <%= form_with url: posts_path, method: :get, local: true do %>
+    <%= label_tag :tag, 'タグで検索' %>
+    <%= text_field_tag :tag, params[:tag] %>
+    <%= hidden_field_tag :filter, params[:filter] %>
+    <%= submit_tag '検索' %>
+  <% end %>
+</div>
 
     <% if @posts.any? %>
       <div class="post-list">
