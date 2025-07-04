@@ -27,6 +27,10 @@
         <% end %>
       </h1>
 
+      <% if params[:filter] == "mine" %>
+        <%= link_to "いいねした投稿を見る", liked_posts_user_path(current_user), class: "btn btn-outline-primary mb-3" %>
+      <% end %>
+
       <div class="filter-tabs">
         <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button #{'active' if params[:filter] == 'failure'}" %>
         <% if user_signed_in? %>
