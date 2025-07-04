@@ -5,7 +5,7 @@
     <% @liked_posts.each do |post| %>
       <div class="post-card">
         <% if post.image.attached? %>
-          <%= image_tag post.image.variant(resize_to_fill: [300, 200]), class: "post-image" %>
+          <%= image_tag url_for(post.image), class: "post-image" %>
         <% end %>
 
         <div class="card-body">
