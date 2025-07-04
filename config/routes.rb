@@ -27,6 +27,10 @@ Rails.application.routes.draw do
   namespace :admin do
   post 'run_seed', to: 'seeds#run'
   end
-  # Defines the root path route ("/")
-  # root "posts#index"
+  
+  resources :users do
+  member do
+    get :liked_posts
+  end
+ end
 end
