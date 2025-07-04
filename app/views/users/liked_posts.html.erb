@@ -1,0 +1,13 @@
+<h2><%= @user.name %> さんがいいねした投稿</h2>
+
+<% if @liked_posts.any? %>
+  <% @liked_posts.each do |post| %>
+    <div class="post-card">
+      <%= link_to post.title, post_path(post) %>
+      <p>投稿者: <%= post.user.name %></p>
+      <p>野菜: <%= post.vegetable.name %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>まだいいねした投稿はありません。</p>
+<% end %>
