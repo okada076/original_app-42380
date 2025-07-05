@@ -35,4 +35,9 @@ Rails.application.routes.draw do
     get :liked_posts
   end
  end
+
+ namespace :admin do
+  resources :growing_steps, only: [:new, :create]
+ end
+ 
 end
