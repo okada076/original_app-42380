@@ -24,7 +24,7 @@ class Admin::GrowingStepsController < ApplicationController
   end
 
   def ensure_admin!
-    unless current_user.email == "あなたのメールアドレス"
+    unless current_user.email == "test1@gmail.com"
       redirect_to root_path, alert: "アクセス権限がありません"
     end
   end
