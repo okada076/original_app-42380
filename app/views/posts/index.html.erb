@@ -27,46 +27,52 @@
         <% end %>
       </h1>
 
+      <% if params[:filter] == "mine" %>
+        <%= link_to "いいねした投稿を見る", liked_posts_user_path(current_user), class: "btn btn-outline-primary mb-3" %>
+      <% end %>
+
       <div class="filter-tabs">
-        <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button #{'active' if params[:filter] == 'failure'}" %>
-        <% if user_signed_in? %>
-          <%= link_to "マイページ", posts_path(filter: "mine"), class: "filter-button #{'active' if params[:filter] == 'mine'}" %>
-        <% end %>
-      </div>
-
-      <%= form_with url: posts_path, method: :get, local: true do %>
-        <%= label_tag :tag, 'タグで検索' %>
-        <%= text_field_tag :tag, params[:tag] %>
-        <%= hidden_field_tag :filter, params[:filter] %>
-        <%= submit_tag '検索' %>
-      <% end %>
-    </div>
-
-<% if @posts.any? %>
-    <div class="post-list">
-  <% @posts.each do |post| %>
-    <div class="post-card">
-      <% if post.image.attached? %>
-        <%= image_tag url_for(post.image), class: "post-image" %>
-      <% end %>
-
-      <div class="card-body">
-        <h5 class="post-title"><%= post.title %></h5>
-        <p class="post-meta"><%= post.user.nickname %>｜<%= post.vegetable.name %></p>
-
-        <% if params[:filter] == "mine" %>
-  <% if post.grow_log? %>
-    <span class="category-badge grow_log">育成記録</span>
-  <% elsif post.trouble_note? %>
-    <span class="category-badge trouble_note">つまづきノート</span>
+  <% unless params[:filter] == 'failure' %>
+    <%= link_to "つまずきノート", posts_path(filter: "failure"), class: "filter-button" %>
   <% end %>
-<% end %>
 
-        <%= link_to '詳細を見る', post_path(post), class: "btn btn-outline-success btn-sm mt-2 w-100" %>
-      </div>
-    </div>
+  <% if user_signed_in? && params[:filter] != 'mine' %>
+    <%= link_to "マイページ", posts_path(filter: "mine"), class: "filter-button" %>
+  <% end %>
+
+  <%= form_with url: posts_path, method: :get, local: true do %>
+    <%= label_tag :tag, 'タグで検索' %>
+    <%= text_field_tag :tag, params[:tag] %>
+    <%= hidden_field_tag :filter, params[:filter] %>
+    <%= submit_tag '検索' %>
   <% end %>
 </div>
+
+    <% if @posts.any? %>
+      <div class="post-list">
+        <% @posts.each do |post| %>
+          <div class="post-card">
+            <% if post.image.attached? %>
+              <%= image_tag url_for(post.image), class: "post-image" %>
+            <% end %>
+
+            <div class="card-body">
+              <h5 class="post-title"><%= post.title %></h5>
+              <p class="post-meta"><%= post.user.nickname %>｜<%= post.vegetable.name %></p>
+
+              <% if params[:filter] == "mine" %>
+                <% if post.grow_log? %>
+                  <span class="category-badge grow_log">育成記録</span>
+                <% elsif post.trouble_note? %>
+                  <span class="category-badge trouble_note">つまづきノート</span>
+                <% end %>
+              <% end %>
+
+              <%= link_to '詳細を見る', post_path(post), class: "btn btn-outline-success btn-sm mt-2 w-100" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% else %>
       <p>該当する投稿はありません。</p>
     <% end %>

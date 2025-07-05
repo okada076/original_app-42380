@@ -116,6 +116,12 @@
   }
 
   .filter-tabs {
+   display: flex;              // ← これを追加！
+   justify-content: center;   // ← 中央寄せ
+   flex-wrap: wrap;           // ← スマホで折り返しOK
+   align-items: center;
+   gap: 12px;  
+
     margin-bottom: 16px;
 
     a {
@@ -129,11 +135,13 @@
     }
 
     form {
-      display: inline-block;
-      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0; // ← 修正：余白をリセット
 
       label {
-        margin-right: 8px;
+        margin: 0;
       }
 
       input[type="text"] {
@@ -141,7 +149,6 @@
         font-size: 1rem;
         border: 1px solid #ccc;
         border-radius: 4px;
-        margin-right: 8px;
       }
 
       input[type="submit"] {

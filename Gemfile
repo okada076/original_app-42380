@@ -84,3 +84,5 @@ gem 'devise'
 gem 'sassc-rails'
 
 gem "aws-sdk-s3", require: false
+
+gem 'image_processing', '~> 1.2'
