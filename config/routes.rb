@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get 'growing_steps/new'
+    get 'growing_steps/create'
   post 'run_seed', to: 'seeds#run'
   end
   
@@ -33,4 +35,9 @@ Rails.application.routes.draw do
     get :liked_posts
   end
  end
+
+ namespace :admin do
+  resources :growing_steps, only: [:new, :create]
+ end
+ 
 end
