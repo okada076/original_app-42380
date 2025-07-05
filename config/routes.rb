@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    get 'growing_steps/new'
+    get 'growing_steps/create'
   post 'run_seed', to: 'seeds#run'
   end
   
