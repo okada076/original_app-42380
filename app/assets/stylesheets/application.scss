@@ -5,6 +5,7 @@
 @import "show";
 @import "posts";
 @import "liked_posts";
+@import "footer";
 
 .container {
   max-width: 1080px;
@@ -12,52 +13,3 @@
   padding: 0 24px;
 }
 
-.footer {
-  background-color: #f4f4f4;
-  border-top: 1px solid #ddd;
-  padding: 20px 0;
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin-top: 40px;
-}
-
-.footer-content {
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.footer-links {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
-}
-
-.footer-links li {
-  display: inline;
-  margin: 0 10px;
-}
-
-.footer-links a {
-  color: #555;
-  text-decoration: none;
-}
-
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-main {
-  flex: 1;
-}
