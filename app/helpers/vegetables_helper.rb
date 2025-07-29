@@ -7,5 +7,4 @@ module VegetablesHelper
       '葉菜類' => 'leaf'
     }[category] || 'other'
   end
-
 end

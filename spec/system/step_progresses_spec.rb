@@ -22,27 +22,27 @@ RSpec.describe 'StepProgresses', type: :system do
   end
 
   it 'STEPをチェックすると、保存されてリロード後もチェックが維持されている', js: true do
-  sign_in_as(user)
+    sign_in_as(user)
 
-  step = create(:growing_step, vegetable: vegetable, step_number: 1)
-  checkbox_id = "step_checkbox_#{step.id}"
-  puts "Generated checkbox_id: #{checkbox_id}"
+    step = create(:growing_step, vegetable: vegetable, step_number: 1)
+    checkbox_id = "step_checkbox_#{step.id}"
+    puts "Generated checkbox_id: #{checkbox_id}"
 
-  visit vegetable_growing_steps_path(vegetable)
+    visit vegetable_growing_steps_path(vegetable)
 
-  expect(page).to have_selector("##{checkbox_id}", wait: 5)
-  expect(page).to have_unchecked_field(checkbox_id)
+    expect(page).to have_selector("##{checkbox_id}", wait: 5)
+    expect(page).to have_unchecked_field(checkbox_id)
 
-  check(checkbox_id)
+    check(checkbox_id)
 
-  sleep 1 # JSによる非同期処理を待つ
+    sleep 1 # JSによる非同期処理を待つ
 
-  expect(page).to have_selector("##{checkbox_id}.saved", wait: 5)
-  expect(page).to have_checked_field(checkbox_id)
+    expect(page).to have_selector("##{checkbox_id}.saved", wait: 5)
+    expect(page).to have_checked_field(checkbox_id)
 
-  visit current_path
-  expect(page).to have_checked_field(checkbox_id)
-end
+    visit current_path
+    expect(page).to have_checked_field(checkbox_id)
+  end
 
   it 'チェックを入れると記録が保存される（別のSTEP表示名）' do
     Capybara.reset_sessions!
@@ -69,20 +69,20 @@ end
   end
 
   it 'ログインユーザーが手順ページへ遷移できる' do
-  sign_in_as(user)
-  visit root_path
+    sign_in_as(user)
+    visit root_path
 
-  expect(page).to have_link('作り方ガイド', href: vegetables_path)
-  click_link '作り方ガイド'
+    expect(page).to have_link('作り方ガイド', href: vegetables_path)
+    click_link '作り方ガイド'
 
-  expect(current_path).to eq(vegetables_path)
+    expect(current_path).to eq(vegetables_path)
 
-  expect(page).to have_link(vegetable.name)
-  click_link vegetable.name
+    expect(page).to have_link(vegetable.name)
+    click_link vegetable.name
 
-  expect(current_path).to eq(vegetable_growing_steps_path(vegetable))
-  expect(page).to have_content("#{vegetable.name} の作り方ガイド")
-end
+    expect(current_path).to eq(vegetable_growing_steps_path(vegetable))
+    expect(page).to have_content("#{vegetable.name} の作り方ガイド")
+  end
 
   it '未ログインユーザーは育て方手順ページにアクセスできずログインページにリダイレクトされる' do
     Capybara.reset_sessions!

@@ -3,18 +3,18 @@ class Admin::GrowingStepsController < ApplicationController
   before_action :ensure_admin!
 
   def new
-   # @growing_step = GrowingStep.new
-    #@vegetables = Vegetable.all
+    # @growing_step = GrowingStep.new
+    # @vegetables = Vegetable.all
   end
 
   def create
-     #@growing_step = GrowingStep.new(growing_step_params)
-    #if @growing_step.save
-      #redirect_to new_admin_growing_step_path, notice: "育て方手順を追加しました！"
-    #else
-     # @vegetables = Vegetable.all
-      #render :new
-    #end
+    # @growing_step = GrowingStep.new(growing_step_params)
+    # if @growing_step.save
+    # redirect_to new_admin_growing_step_path, notice: "育て方手順を追加しました！"
+    # else
+    # @vegetables = Vegetable.all
+    # render :new
+    # end
   end
 
   private
@@ -24,8 +24,8 @@ class Admin::GrowingStepsController < ApplicationController
   end
 
   def ensure_admin!
-    unless current_user.email == "test1@gmail.com"
-      redirect_to root_path, alert: "アクセス権限がありません"
-    end
+    return if current_user.email == 'test1@gmail.com'
+
+    redirect_to root_path, alert: 'アクセス権限がありません'
   end
 end
